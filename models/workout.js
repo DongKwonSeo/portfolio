@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const { CommentSchema } = require("./comment");
+const getCurrentDate = require("../lib/getCurrentDate");
 
 const WorkoutSchema = new mongoose.Schema({
   workout_type: {

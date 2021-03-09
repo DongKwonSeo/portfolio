@@ -63,6 +63,10 @@ exports.getUser = asyncHandler(async (req, res, next) => {
 
 // 친구 등록
 
+// 유저 정보수정 - 친구 등록, 삭제 
+
+// PUT api/users/:id
+
 exports.friend = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   if (!id) return res.status(404).send();

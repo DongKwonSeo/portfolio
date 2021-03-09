@@ -121,3 +121,19 @@ exports.getCalorie = asyncHandler(async (req, res, next) => {
   // });
   // console.log(calorie);
 });
+
+// 이미지 등록
+
+//  POST api/meals/upload
+exports.mealImg = asyncHandler(async (req, res, next) => {
+  const { img } = req.body;
+  const mealImg = req.files.mealImg;
+
+  mealImg.mv("../uploads" + mealImg.name, function (e) {
+    if (e) {
+      console.log("could't find file");
+    } else {
+      console.log("mealsIMg file uploaded");
+    }
+  });
+});

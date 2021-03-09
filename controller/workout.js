@@ -1,8 +1,11 @@
 const path = require("path");
 const ErrorResponse = require("../utils/erroRespons");
 const asyncHandler = require("../middleware/async");
+
 const Workout = require("../models/workout");
 const User = require("../models/user");
+const { Comment } = require("../models/comment");
+const getCurrentDate = require("../lib/getCurrentDate")
 
 // ## Workouts
 

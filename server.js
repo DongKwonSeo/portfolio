@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === "development") {
 
 const users = require("./routes/users");
 const meals = require("./routes/meals");
-const workout = require("./routes/meals");
+const workout = require("./routes/workout");
 
 // testing
 // app.get("/", (req, res, next) => {
