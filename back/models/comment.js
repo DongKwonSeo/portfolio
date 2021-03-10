@@ -10,12 +10,12 @@ const CommentSchema = new Schema({
     ref: "User",
     requried: true,
   },
-  ons: {
+  content: {
     type: Schema.Types.ObjectId,
     refPath: "onModel",
     required: true,
   },
-  onModels: {
+  onModel: {
     type: String,
     required: true,
     enum: ["Meals", "Workout"],

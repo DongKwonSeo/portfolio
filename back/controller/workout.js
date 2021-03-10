@@ -5,7 +5,8 @@ const asyncHandler = require("../middleware/async");
 const Workout = require("../models/workout");
 const User = require("../models/user");
 const { Comment } = require("../models/comment");
-const getCurrentDate = require("../lib/getCurrentDate")
+const getCurrentDate = require("../lib/getCurrentDate");
+const meals = require("../models/meals");
 
 // ## Workouts
 
@@ -29,9 +30,9 @@ exports.getWorkOut = asyncHandler(async (req, res, next) => {
 
 exports.createWorkout = asyncHandler(async (req, res, next) => {
   const { workout_type, hour, workout_calorie, user_id } = req.body;
-
+  console.log(user_id);
   try {
-    let user = await User.findOne({ user_id });
+    let user = await User.findById(user_id);
     if (!user) {
       return res.status(404).send({
         message: "create new user fail",
@@ -42,7 +43,7 @@ exports.createWorkout = asyncHandler(async (req, res, next) => {
       workout_type,
       hour,
       workout_calorie,
-      user_id,
+      user: user_id,
     });
 
     res.send({ message: "create new workout success", workout });
@@ -55,6 +56,26 @@ exports.createWorkout = asyncHandler(async (req, res, next) => {
 // 운동 정보수정  - 댓글 달기
 
 //  PUT api/workouts/:id
+exports.putWorkout = asyncHandler(async (req, res, next) => {
+  const { comments, user_id } = req.body;
+  console.log(comments, user_id);
+  let workout = await Workout.findById(req.params.id);
+
+  const comment = Comment({
+    comment: comments,
+    user: user_id,
+    content: workout._id,
+    onModel: "Workout",
+  });
+  // [workout,comment] = await
+  workout = await Workout.findByIdAndUpdate(
+    { _id: workout._id },
+    { $push: { workout_comments: comment } },
+    { new: true, runValidators: true }
+  );
+  await comment.save();
+  res.status(200).json({ success: true, workout, comment });
+});
 
 //   운동시간 가져오기
 

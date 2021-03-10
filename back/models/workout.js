@@ -22,6 +22,11 @@ const WorkoutSchema = new mongoose.Schema({
     type: Date,
     default: getCurrentDate(),
   },
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    require: true,
+  },
 });
 
 module.exports = mongoose.model("Workout", WorkoutSchema);

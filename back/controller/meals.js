@@ -3,9 +3,7 @@ const ErrorResponse = require("../utils/erroRespons");
 const asyncHandler = require("../middleware/async");
 const Meals = require("../models/meals");
 const User = require("../models/user");
-const { findById } = require("../models/meals");
 
-const { json } = require("body-parser");
 const { Comment } = require("../models/comment");
 const getCurrentDate = require("../lib/getCurrentDate");
 
@@ -53,18 +51,18 @@ exports.createMeal = asyncHandler(async (req, res, next) => {
 // 식단 정보수정-댓글 -달기
 // PUT api/meals/:id
 exports.putMeal = asyncHandler(async (req, res, next) => {
-  let { comments, user_id } = req.body;
-  console.log(comments, user_id, req.params.id);
+  const { comments, user_id } = req.body;
+
   let meal = await Meals.findById(req.params.id);
-  console.log(meal);
+
   let comment = new Comment({
     comment: comments,
     user: user_id,
     ons: meal._id,
-    onModels: "Meals",
+    onModel: "Meals",
   });
 
-  [meal, cooment] = await Promise.all([
+  [meal, comment] = await Promise.all([
     Meals.updateOne({ _id: meal._id }, { $push: { comments: comment } }),
     comment.save(),
   ]);
@@ -125,13 +123,13 @@ exports.getCalorie = asyncHandler(async (req, res, next) => {
 
 // 이미지 등록
 
-//  POST api/meals/upload
+//  POST api/meals/:id/upload
 exports.mealImg = asyncHandler(async (req, res, next) => {
-  const { img } = req.body;
+  const { img, user_id } = req.body;
   const mealImg = req.files.mealImg;
 
-  mealImg.mv("../uploads" + mealImg.name, function (e) {
-    if (e) {
+  mealImg.mv("../uploads/" + mealImg.name, async (error) => {
+    if (error) {
       console.log("could't find file");
     } else {
       console.log("mealsIMg file uploaded");
