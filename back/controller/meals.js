@@ -4,15 +4,16 @@ const asyncHandler = require("../middleware/async");
 const Meals = require("../models/meals");
 const User = require("../models/user");
 const { findById } = require("../models/meals");
-const meals = require("../models/meals");
+
 const { json } = require("body-parser");
 const { Comment } = require("../models/comment");
+const getCurrentDate = require("../lib/getCurrentDate");
 
 // 전체 식단 리스트 조회
 // GET api/meals/
 exports.getmeals = asyncHandler(async (req, res, next) => {
   const meals = await Meals.find();
-  if (!meals.length) {
+  if (!meals) {
     next(new ErrorResponse("Meals data not found", 404));
   }
   res.status(200).json({
@@ -102,10 +103,10 @@ exports.putMeal = asyncHandler(async (req, res, next) => {
 // 칼로리 가져오기
 // GET api/meals/cal
 exports.getCalorie = asyncHandler(async (req, res, next) => {
-  const { cal, user_id } = req.params;
+  const { user_id } = req.params;
   if (!user_id) return res.status(404).send();
   try {
-    const calorie = await Meals.findOne({ calorie: cal });
+    const calorie = await Meals.findOne({ calorie });
 
     if (!calorie)
       return res.send({ message: "get user fail", error: "null of user" });
@@ -137,3 +138,10 @@ exports.mealImg = asyncHandler(async (req, res, next) => {
     }
   });
 });
+
+// {
+//   "meal_desc":["사과","수박"],
+//   "calorie":"7000",
+//   "user_id": "6043c0fb032f6022cda5c18a",
+//   "meal_type":"점심"
+// }
