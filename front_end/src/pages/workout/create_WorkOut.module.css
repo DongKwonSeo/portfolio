@@ -1,0 +1,19 @@
+.wrap {
+  text-align: center;
+  padding: 200px 0;
+}
+.form_padding {
+  padding: 50px 0;
+}
+.form_padding > input {
+  height: 40px;
+}
+
+.form_padding > h2 {
+  padding: 0 166px 10px 0;
+}
+
+button {
+  width: 100px;
+  height: 40px;
+}
