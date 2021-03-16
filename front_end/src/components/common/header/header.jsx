@@ -1,15 +1,17 @@
 import React from "react";
 import styles from "./header.module.css";
+import { Link } from "react-router-dom";
 
-const Header = ({ onLogout }) => (
-  <header className={styles.header}>
-    {onLogout && (
-      <button className={styles.login} onClick={onLogout}>
-        Google
-      </button>
-    )}
-    <img src="../imgs/logo.jpg" alt="logo" />
-  </header>
-);
+const Header = (props) => {
+  return (
+    <header className={styles.header}>
+      <h1 className={styles.img}>
+        <Link to={"/"}>
+          <img src="../imgs/logo.jpg" alt="logo" />
+        </Link>
+      </h1>
+    </header>
+  );
+};
 
 export default Header;

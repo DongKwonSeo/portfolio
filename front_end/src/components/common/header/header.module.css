@@ -2,4 +2,7 @@
   display: flex;
   border: 1px solid red;
 }
-
+.img {
+  padding: 0 0 0 23px;
+  width: 100%;
+}
