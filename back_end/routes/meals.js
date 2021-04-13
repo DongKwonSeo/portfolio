@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 
 const {
   getmeals,
@@ -12,6 +13,7 @@ router.get("/", getmeals);
 router.get("/cal", getCalorie);
 router.post("/", createMeal);
 router.put("/:id", putMeal);
+
 
 module.exports = router;
 

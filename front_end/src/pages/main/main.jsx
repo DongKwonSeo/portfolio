@@ -10,8 +10,8 @@ const Main = () => {
     <Container>
       <List />
       <div className={styles.table}>
-        <Meals />
         <Workout />
+        <Meals />
       </div>
     </Container>
   );

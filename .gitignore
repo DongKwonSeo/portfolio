@@ -1,6 +1,6 @@
 .DS_Store
 ./back/node_modules
-./front/health/node_modules
+./front/node_modules
 
 
 /*/node_modules

@@ -1,7 +1,8 @@
 import React from "react";
-import styles from "./workout.module.css";
+import styles from "./modal_workout.module.css";
+// import ModalWorkout from "../../../modals/workout/modal_workout";
 
-const Workout = (props) => {
+const ModalWorkout = ({ create, workout_type, hour, workout_calorie }) => {
   return (
     <div className={styles.wrap}>
       <div className="table">
@@ -16,10 +17,10 @@ const Workout = (props) => {
           </thead>
           <tbody>
             <tr>
-              <td>20.3.10</td>
-              <td>조깅</td>
-              <td>3.20pm</td>
-              <td>200kcal</td>
+              <td>{create}</td>
+              <td>{workout_type}</td>
+              <td>{hour}</td>
+              <td>{workout_calorie}</td>
             </tr>
           </tbody>
         </table>
@@ -40,4 +41,4 @@ const Workout = (props) => {
   );
 };
 
-export default Workout;
+export default ModalWorkout;

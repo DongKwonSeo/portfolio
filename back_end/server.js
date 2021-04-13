@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const path = require("path");
@@ -15,6 +16,8 @@ dotenv.config({ path: "./config/config.env" });
 const app = express();
 // DB 설정
 connectDB();
+// 크로스 설정
+app.use(cors());
 
 // bodyParser
 app.use(bodyParser.json());
