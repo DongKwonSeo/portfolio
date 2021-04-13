@@ -2,7 +2,9 @@ import React from "react";
 import styles from "./modal_workout.module.css";
 // import ModalWorkout from "../../../modals/workout/modal_workout";
 
-const ModalWorkout = ({ create, workout_type, hour, workout_calorie }) => {
+const ModalWorkout = (props) => {
+  const { create, workout_type, hour, workout_calorie } = props;
+
   return (
     <div className={styles.wrap}>
       <div className="table">

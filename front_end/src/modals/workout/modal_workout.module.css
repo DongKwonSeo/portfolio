@@ -5,4 +5,5 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: -1; /* TODO 대충 준 값임! 수정 필요~ */
 }

@@ -1,31 +1,46 @@
 import React, { useState } from "react";
 import ModalWorkout from "../../../modals/workout/modal_workout";
 
-const WorkoutsItem = ({ work, setModal }) => {
-  const [isopen, setisopen] = useState(false);
+const WorkoutsItem = ({
+  work,
+  setModal,
+  isopen,
+  setisopen,
+  setModalWorkoutState,
+}) => {
+  // const [isopen, setisopen] = useState(false);
   return (
     <tr
       onClick={
-        () => setisopen(!isopen)
+        // () => setisopen(!isopen);
+        () => {
+          setisopen(!isopen);
+          setModalWorkoutState({
+            create: work.create,
+            workout_type: work.workout_type,
+            hour: work.hour,
+            workout_calorie: work.workout_calorie,
+          });
+        }
 
         // alert(
         //   work.create + " " + work.workout_type + " " + work.workout_calorie
         // );
         // modal창을 열어주는 함수
         // setModal(
-
         //   // work.create + " " + work.workout_type + " " + work.workout_calorie
         // );
+        // console.log("=_=?")
       }
     >
-      {isopen ? (
+      {/* {isopen ? (
         <ModalWorkout
           create={work.create}
           workout_type={work.workout_type}
           hour={work.hour}
           workout_calorie={work.workout_calorie}
         />
-      ) : null}
+      ) : null} */}
       <td>{work.create}</td>
       <td>{work.workout_type}</td>
       <td>{work.hour}</td>

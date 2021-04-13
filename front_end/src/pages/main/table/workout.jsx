@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./workout.module.css";
 import WorkoutsItem from "./workouts_item";
+import ModalWorkout from "../../../modals/workout/modal_workout";
 import axios from "axios";
 
 /*
@@ -23,6 +24,13 @@ import axios from "axios";
 */
 
 const Workout = (props) => {
+  const [isopen, setisopen] = useState(false);
+  const [modalWorkoutState, setModalWorkoutState] = useState({
+    create: "-_-?;;;",
+    workout_type: "-_-?;;;",
+    hour: "-_-?;;;",
+    workout_calorie: "-_-?;;;",
+  });
   const [modal, setModal] = useState("");
   // 접속 하자마자.. 뭔가 하고 싶다-> componentDidMount -> useEffect hook을 쓴다!
 
@@ -104,10 +112,26 @@ const Workout = (props) => {
 
         <tbody>
           {workout.map((work, i) => (
-            <WorkoutsItem key={i} work={work} setModal={setModal} />
+            <WorkoutsItem
+              key={i} //
+              work={work}
+              setModal={setModal}
+              isopen={isopen}
+              setisopen={setisopen}
+              setModalWorkoutState={setModalWorkoutState}
+            />
           ))}
         </tbody>
       </table>
+
+      {isopen ? (
+        <ModalWorkout
+          create={modalWorkoutState.create}
+          workout_type={modalWorkoutState.workout_type}
+          hour={modalWorkoutState.hour}
+          workout_calorie={modalWorkoutState.workout_calorie}
+        />
+      ) : null}
 
       <br />
       <p>{modal}</p>
