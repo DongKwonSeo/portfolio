@@ -1,19 +1,19 @@
 import React from "react";
-import styles from "./main.module.css";
 import List from "./list/list";
 import Meals from "./table/meals";
 import Workout from "./table/workout";
-import Container from "./container/container";
-
+import "../../scss/layout.scss";
 const Main = () => {
   return (
-    <Container>
-      <List />
-      <div className={styles.table}>
-        <Workout />
-        <Meals />
+    <section className="section">
+      <div className="container">
+        <List />
+        <div className="table">
+          <Workout />
+          <Meals />
+        </div>
       </div>
-    </Container>
+    </section>
   );
 };
 

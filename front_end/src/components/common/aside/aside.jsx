@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "./aside.module.css";
 import { Link } from "react-router-dom";
-
+import "../../../scss/layout.scss";
+import "../../../scss/aside.scss";
 const Aside = (props) => {
   return (
-    <div className={styles.wrap}>
-      <ul className={styles.list}>
+    <div className="aside">
+      <ul className="nav">
         <li>
           <Link to="/workout">
             <i className="fas fa-dumbbell"></i>

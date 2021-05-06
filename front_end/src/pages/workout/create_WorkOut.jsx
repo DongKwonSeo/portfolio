@@ -1,21 +1,19 @@
 // import React, { useEffect, useState } from "react";
 import React, { useState } from "react";
-import Container from "../main/container/container";
-import styles from "./create_WorkOut.module.css";
 import axios from "axios";
+import "../../scss/layout.scss";
+import Button from "../../components/common/button";
 
 const CreateWorkOut = (props) => {
   const [workout_type, setworkout_type] = useState("");
   const [hour, sethour] = useState("");
   const [workout_calorie, setworkout_calorie] = useState("");
-  // // workout_type, hour, workout_calorie, user_id
 
-  //  save 누르면
-  const save = (e) => {
+  const save = async (e) => {
     e.preventDefault();
 
     // axios 서버에 보낸다!
-    axios
+    await axios
       .post("http://localhost:3601/api/workout", {
         // meal_type,
         // calorie,
@@ -42,74 +40,62 @@ const CreateWorkOut = (props) => {
 
     // form reset!
     clearAll();
-
-    console.log(workout_type, hour, workout_calorie);
   };
 
-  // const clearAll; // clearAll이라는 const를 선언해주고, 초기화는 안 해줌
-  // const clearAll
-
-  //  = // assign 혹은 initializer
-
-  // 이거는.. 익명함수를 선언한 것. // 익명함수란? 함수긴 한데 이름이 없음.
-  // () => {
-  //   sethour("");
-  //   setworkout_type("");
-  //   setworkout_calorie("");
-  // };
-
-  // 익명 함수 즉시 실행
-  // (()=>{ console.log('-_-?'); })();
   const clearAll = () => {
     sethour("");
     setworkout_type("");
     setworkout_calorie("");
   };
 
-
-
+  const type_change = (e) => {
+    console.log(type_change);
+    setworkout_type(e.target.value);
+  };
+  const time_change = (e) => {
+    sethour(e.target.value);
+  };
+  const claorie_change = (e) => {
+    setworkout_calorie(e.target.value);
+  };
   return (
-    <>
-      <h1>운동 등록</h1>
-      <Container>
-        <div className={styles.wrap}>
-          <div className={styles.form_padding}>
+    <section className="section_padding">
+      <div className="container">
+        <h1 className="post__padding">운동 등록</h1>
+        <form className="form_padding">
+          <div className="input_padding">
             <h2>운동 종류</h2>
-            <form action="">
-              <input
-                type="text"
-                placeholder="오늘 먹은 음식을 등록해주세요"
-                value={workout_type}
-                onChange={(e) => setworkout_type(e.target.value)}
-              />
-            </form>
+            <input
+              type="text"
+              placeholder="운동을 적어 주세요!"
+              value={workout_type}
+              onChange={type_change}
+            />
           </div>
-          <div className={styles.form_padding}>
+          <div className="input_padding">
             <h2>운동 소요시간</h2>
-            <form action="">
-              <input
-                type="select"
-                placeholder="운동 소요시간"
-                value={hour}
-                onChange={(e) => sethour(e.target.value)}
-              />
-            </form>
+
+            <input
+              type="select"
+              placeholder="운동 소요시간"
+              value={hour}
+              onChange={time_change}
+            />
           </div>
-          <div className={styles.form_padding}>
+          <div className="input_padding">
             <h2>소모 칼로리</h2>
-            <form action="">
-              <input
-                type="text"
-                placeholder="소비한 칼로리를 입력해주세요"
-                value={workout_calorie}
-                onChange={(e) => setworkout_calorie(e.target.value)}
-              />
-            </form>
+            <input
+              type="text"
+              placeholder="소비한 칼로리를 입력해주세요"
+              value={workout_calorie}
+              onChange={claorie_change}
+            />
           </div>
-          <button onClick={save}>저장</button>
-        </div>
-      </Container>
-    </>
+          <Button handleClick={save}>저장</Button>
+          {/* <button onClick={save}>저장</button> */}
+        </form>
+      </div>
+    </section>
   );
 };
 

@@ -1,6 +1,5 @@
-import React from "react";
-import styles from "./App.module.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import "./scss/layout.scss";
 // import Workout from "./modals/workout/workout";
 // import Login from "./pages/login/login";
 
@@ -9,6 +8,7 @@ import Main from "./pages/main/main";
 import Aside from "./components/common/aside/aside";
 import CreateMeal from "./pages/meal/create_Meal";
 import CreateWorkOut from "./pages/workout/create_WorkOut";
+
 // import Meal from "./modals/meal/meal";
 
 function App() {
@@ -18,14 +18,15 @@ function App() {
       {/* <Workout /> */}
       {/* <Meal /> */}
       <Header />
-      <div className={styles.wrap}>
-        <Aside className={styles.aside} />
-        <Switch>
-          <Route exact path="/" component={Main} />
-          <Route exact path="/meal" component={CreateMeal} />
-          <Route exact path="/workout" component={CreateWorkOut} />
-        </Switch>
-      </div>
+      
+      <Aside />
+      <Switch>
+        <Route exact={true} path="/" component={Main} />
+        {/* <Route path="/" component={Aside} /> */}
+
+        <Route path="/meal" component={CreateMeal} />
+        <Route path="/workout" component={CreateWorkOut} />
+      </Switch>
     </BrowserRouter>
   );
 }

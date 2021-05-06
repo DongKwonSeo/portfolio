@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import styles from "./workout.module.css";
 import WorkoutsItem from "./workouts_item";
+import ModalWorkout from "../../../modals/workout/modal_workout";
 import axios from "axios";
 
 /*
@@ -23,44 +23,33 @@ import axios from "axios";
 */
 
 const Workout = (props) => {
-  const [modal, setModal] = useState("");
-  // 접속 하자마자.. 뭔가 하고 싶다-> componentDidMount -> useEffect hook을 쓴다!
+  const [isopen, setisopen] = useState(false);
+  const [modalWorkoutState, setModalWorkoutState] = useState({
+    create: null,
+    workout_type: null,
+    hour: null,
+    workout_calorie: null,
+  });
 
-  //내가 저장한걸 접속 하자마자  보고싶다
   useEffect(() => {
-    console.log("-_-?");
-
     // 저장한걸 get http://localhost:3601/api/workout 가지고 온다
-    axios.get("http://localhost:3601/api/workout").then((result) => {
-      // console.log({ result });
-      // console.log({ data: result.data.data });
-      const workout = result.data.data;
-      // 그리고 workout list 넣어 준다
+    axios
+      .get("http://localhost:3601/api/workout") //
+      .then((result) => {
+        // console.log({ result });
+        // console.log({ data: result.data.data });
+        const workout = result.data.data;
+        for (let i = 0; i < workout.length; i++) {
+          const item = workout[i];
+          // item.id = i;
+          console.log(item);
+          item.create = getMD(item.create);
+          item.workout_calorie = item.workout_calorie + "kal";
+          item.hour = item.hour + "h";
+        }
 
-      //날짜랑 칼로리만 다시 만들어 준다 <- !!!
-      // 에.. 우ㅉ면 좋을까요?
-      // 함수 만든건 여기다 넣어준 당ㅁㅇ,
-      // 어떠게 너죠?
-      // 호출..
-      // 리스트... 의 모든 것을.. 이케이케 해주고 싶다!
-      // -> 반복문
-
-      //날짜랑 칼로리만 다시 만들어 준다 <- !!!
-      console.log("workout.length", workout.length);
-      for (let i = 0; i < workout.length; i++) {
-        const item = workout[i];
-        // item.id = i;
-        console.log(item);
-        item.create = getMD(item.create);
-        // console.log({ item });
-        //날짜
-        // getMD()
-        //칼로리
-        item.workout_calorie = item.workout_calorie + "kal";
-      }
-
-      setWorkout(workout);
-    });
+        setWorkout(workout);
+      });
   }, []); // useEffect의 성질을 사용한 꼼수! 입니다
 
   function getMD(create) {
@@ -82,17 +71,17 @@ const Workout = (props) => {
       //   <th>운동 시간</th>
       //   <th>소비 칼로리</th>
     },
-    {
-      id: "???", // ???
-      date: "3.11", // getMD(create)
-      workout_type: "헬스", // workout_type
-      hour: 3, // hour
-      workout_calorie: 135, //workout_calorie+'kcal'
-    },
+    // {
+    //   id: "???", // ???
+    //   date: "3.11", // getMD(create)
+    //   workout_type: "헬스", // workout_type
+    //   hour: 3, // hour
+    //   workout_calorie: 135, //workout_calorie+'kcal'
+    // },
   ]);
   return (
     <>
-      <table className={styles.table}>
+      <table className="main_table">
         <thead>
           <tr>
             <th>날짜</th>
@@ -104,13 +93,27 @@ const Workout = (props) => {
 
         <tbody>
           {workout.map((work, i) => (
-            <WorkoutsItem key={i} work={work} setModal={setModal} />
+            <WorkoutsItem
+              key={i} //
+              work={work}
+              isopen={isopen}
+              setisopen={setisopen}
+              setModalWorkoutState={setModalWorkoutState}
+            />
           ))}
         </tbody>
       </table>
-
-      <br />
-      <p>{modal}</p>
+      {/* modal */}
+      <>
+        {isopen ? (
+          <ModalWorkout
+            create={modalWorkoutState.create}
+            workout_type={modalWorkoutState.workout_type}
+            hour={modalWorkoutState.hour}
+            workout_calorie={modalWorkoutState.workout_calorie}
+          />
+        ) : null}
+      </>
     </>
   );
 };

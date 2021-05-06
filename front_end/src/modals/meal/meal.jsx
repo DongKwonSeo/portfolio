@@ -1,12 +1,12 @@
 import React from "react";
-import styles from "./meal.module.css";
+
 const Meal = (props) => {
   return (
-    <div className={styles.wrap}>
+    <div className>
       <h1>
         <img src="../imgs/logo2.png" alt="" width="40%" />
       </h1>
-      <table className={styles.table}>
+      <table className>
         <thead>
           <tr>
             <th>날짜</th>
