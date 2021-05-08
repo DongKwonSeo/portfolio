@@ -1,17 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import MealsItem from "./meals_item";
+import MealsItem from "./table_meals_item";
 
 const Meals = (props) => {
   const [meals, setMeals] = useState([
     {
-      create: null,
-      id: "1",
-      hour: null,
-      date: null,
-      meal_type: null,
-      mealDesc: [""],
-      calorie: null,
+      create: "02.12",
+      // id: "1",
+      // hour: null,
+      meal_type: "아침",
+      mealDesc: ["수박"],
+      calorie: 200,
     },
   ]);
   useEffect(() => {

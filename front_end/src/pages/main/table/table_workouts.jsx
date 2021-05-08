@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import WorkoutsItem from "./workouts_item";
+import WorkoutsItem from "./table_workouts_item";
 import ModalWorkout from "../../../modals/workout/modal_workout";
 import axios from "axios";
 
@@ -65,11 +65,6 @@ const Workout = (props) => {
       workout_type: "조깅",
       hour: "2",
       workout_calorie: "120kcal",
-
-      //   <th>날짜</th>
-      //   <th>운동 종류</th>
-      //   <th>운동 시간</th>
-      //   <th>소비 칼로리</th>
     },
     // {
     //   id: "???", // ???

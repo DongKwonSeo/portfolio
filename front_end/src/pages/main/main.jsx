@@ -1,7 +1,7 @@
 import React from "react";
-import List from "./list/list";
-import Meals from "./table/meals";
-import Workout from "./table/workout";
+import List from "./total_list/total_list";
+import Meals from "./table/table_meals";
+import Workout from "./table/table_workouts";
 import "../../scss/layout.scss";
 const Main = () => {
   return (

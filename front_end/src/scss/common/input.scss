@@ -1,0 +1,23 @@
+.post {
+  max-width: 200px;
+  text-align: center;
+  padding: 30px 0;
+  &__input {
+    padding: 13px 0;
+    width: 200px;
+    font-size: 20px;
+    border: none;
+    background: skyblue;
+    border-radius: 10px;
+    outline: none;
+  }
+}
+
+.hidden {
+  position: fixed;
+  left: -9999em;
+  top: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
