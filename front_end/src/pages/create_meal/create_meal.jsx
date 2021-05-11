@@ -12,6 +12,7 @@ const CreateMeal = (props) => {
   const [calorie, setCalorie] = useState("");
   const [meal_type, setmeal_type] = useState("");
   const [inputdata, setinputdata] = useState("");
+  const [img, setImage] = useState("../imgs/noimg.png");
 
   const save = async (e) => {
     e.preventDefault();
@@ -64,37 +65,62 @@ const CreateMeal = (props) => {
     setinputdata(e.target.value);
   };
 
+  const onChangeFileReader = (e) => {
+    const formData = new FormData();
+
+    // console.log(e.target.files[0]);
+    // formData.append(e.target.files[0]);
+    const reader = new FileReader();
+
+    console.log("event log1", e);
+    reader.onload = (e) => {
+      // const mealImageElem = document.querySelector(".post__meals__img");
+      // console.log(e.currentTarget.reseult);
+      // mealImageElem.src = e.target.files[0].currentTarget.reseult;
+      // console.log("event log2", e);
+    };
+    const imageUrl = reader.readAsDataURL(e.target.files[0]);
+    console.log(reader, "imageUrl", imageUrl);
+  };
+
   return (
     <section className="section_padding">
       <div className="container">
         <div className="post__meals">
-          <img src="../imgs/noimg.png" alt="no_img" />
+          <img className="post__meals__img" src={img} alt="no_img" />
           <div className="form_padding">
-            <>
-              <Postinput
-                title={"음식종류"}
-                value={inputdata}
-                onchange={inputdata_change}
-                placeholder={"오늘 먹은 음식을 등록해주세요"}
-              />
-            </>
-            <div className="radio">
+            <label htmlFor="test">
+              파일 업로드
+              <input id="test" type="file" onChange={onChangeFileReader} />
+            </label>
+
+            <Postinput
+              title={"음식종류"}
+              value={inputdata}
+              onchange={inputdata_change}
+              placeholder={"오늘 먹은 음식을 등록해주세요"}
+            />
+            <div className="">
+              <h2 className="post__title">식사시간</h2>
               <CheckBox
                 id="box1"
                 type={"아침"}
                 value={meal_type}
+                name={"mealTime"}
                 onchange={radioChange_1}
               />
               <CheckBox
                 id="box2"
                 type={"점심"}
                 value={meal_type}
+                name={"mealTime"}
                 onchange={radioChange_2}
               />
               <CheckBox
                 id="box3"
                 type={"저녁"}
                 value={meal_type}
+                name={"mealTime"}
                 onchange={radioChange_3}
               />
             </div>

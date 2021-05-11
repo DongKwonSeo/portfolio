@@ -1,20 +1,21 @@
 import React from "react";
 import "../../scss/common/check_box.scss";
 
-const CheckBox = ({ type, onchange }) => {
+const CheckBox = ({ type, onchange, name }) => {
   return (
-    <div className="checkbox">
-      <label htmlFor="checkbox" className="checkbox__label">
+    <>
+      <label htmlFor={type} className="radio">
         <input
-          className="checkbox__input"
-          type="checkbox" //
+          id={type}
+          className="a11y radio__input"
+          type="radio" //
           value={type}
-          name="box"
+          name={name}
           onChange={onchange}
         />
-        <span className="checkbox__span">{type}</span>
+        <span className="radio__value">{type}</span>
       </label>
-    </div>
+    </>
   );
 };
 
