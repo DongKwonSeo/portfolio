@@ -1,0 +1,18 @@
+$logo_padding: 200px;
+$title_font: 30px;
+
+//
+.home {
+  &__contaier {
+    width: 1200px;
+    margin: 0 auto;
+  }
+  &__logo {
+    text-align: center;
+    padding: $logo_padding 0;
+  }
+  &__box h1 {
+    font-size: $title_font;
+    text-align: center;
+  }
+}

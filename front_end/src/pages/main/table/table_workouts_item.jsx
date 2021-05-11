@@ -1,11 +1,13 @@
 import React from "react";
 
-const WorkoutsItem = ({
+const TableWorkoutItem = ({
   work, //
   isopen,
   setisopen,
   setModalWorkoutState,
 }) => {
+  // --------------
+
   const modal = () => {
     setisopen(!isopen);
     setModalWorkoutState({
@@ -27,4 +29,4 @@ const WorkoutsItem = ({
   );
 };
 
-export default WorkoutsItem;
+export default TableWorkoutItem;

@@ -1,11 +1,11 @@
 import React from "react";
 import "../../scss/common/input.scss";
 
-const Postinput = ({ title, onchange, placeholder }) => {
+const Postinput = ({ title, onchange, placeholder, value }) => {
   return (
     <>
       <form className="post">
-        <h2>{title}</h2>
+        <h2 className="post__title">{title}</h2>
         <label htmlFor="post" className="hidden">
           post
         </label>
@@ -14,6 +14,7 @@ const Postinput = ({ title, onchange, placeholder }) => {
           type="text"
           onChange={onchange}
           placeholder={placeholder}
+          value={value}
         />
       </form>
     </>

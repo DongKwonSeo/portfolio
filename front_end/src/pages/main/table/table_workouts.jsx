@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import WorkoutsItem from "./table_workouts_item";
-import ModalWorkout from "../../../modals/workout/modal_workout";
+import TableWorkoutItem from "./table_workouts_item";
+import ModalWorkout from "../../../components/layout/modals/workout/modal_workout";
 import axios from "axios";
 
 /*
@@ -30,14 +30,22 @@ const Workout = (props) => {
     hour: null,
     workout_calorie: null,
   });
+  const [workout, setWorkout] = useState([
+    {
+      _id: "1",
+      create: "02.12",
+      workout_type: "조깅",
+      hour: "2",
+      workout_calorie: "120kcal",
+    },
+  ]);
 
   useEffect(() => {
-    // 저장한걸 get http://localhost:3601/api/workout 가지고 온다
     axios
       .get("http://localhost:3601/api/workout") //
       .then((result) => {
-        // console.log({ result });
-        // console.log({ data: result.data.data });
+        console.log({ result });
+        console.log({ data: result.data.data });
         const workout = result.data.data;
         for (let i = 0; i < workout.length; i++) {
           const item = workout[i];
@@ -50,30 +58,14 @@ const Workout = (props) => {
 
         setWorkout(workout);
       });
-  }, []); // useEffect의 성질을 사용한 꼼수! 입니다
+  }, []);
 
   function getMD(create) {
-    const d = new Date(create); //지금 시간? 데이터 객체를 지금시간으로 만들어 준다
+    const d = new Date(create);
     const md = d.getMonth() + 1 + "." + d.getDate(); // 데이터 객체 에서 월 , 일 만 가지고 와서 문자열로 만들어 준다
     return md;
   }
 
-  const [workout, setWorkout] = useState([
-    {
-      id: "1",
-      create: "02.12",
-      workout_type: "조깅",
-      hour: "2",
-      workout_calorie: "120kcal",
-    },
-    // {
-    //   id: "???", // ???
-    //   date: "3.11", // getMD(create)
-    //   workout_type: "헬스", // workout_type
-    //   hour: 3, // hour
-    //   workout_calorie: 135, //workout_calorie+'kcal'
-    // },
-  ]);
   return (
     <>
       <table className="main_table">
@@ -87,10 +79,11 @@ const Workout = (props) => {
         </thead>
 
         <tbody>
-          {workout.map((work, i) => (
-            <WorkoutsItem
-              key={i} //
+          {workout.map((work) => (
+            <TableWorkoutItem
+              key={work._id} //
               work={work}
+              setWorkout={setWorkout}
               isopen={isopen}
               setisopen={setisopen}
               setModalWorkoutState={setModalWorkoutState}
@@ -99,6 +92,7 @@ const Workout = (props) => {
         </tbody>
       </table>
       {/* modal */}
+
       <>
         {isopen ? (
           <ModalWorkout

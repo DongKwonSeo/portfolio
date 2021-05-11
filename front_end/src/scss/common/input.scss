@@ -1,15 +1,21 @@
+$post_line: #d3e2f4;
+$input_font: 13px;
+$input_padding: 13px;
+
 .post {
-  max-width: 200px;
-  text-align: center;
+  text-align: left;
   padding: 30px 0;
   &__input {
-    padding: 13px 0;
+    padding: $input_padding;
     width: 200px;
-    font-size: 20px;
-    border: none;
-    background: skyblue;
+    font-size: $input_font;
     border-radius: 10px;
     outline: none;
+    border: 3px solid $post_line;
+  }
+  &__title {
+    margin: 0 0 5px 5px;
+    font-weight: bold;
   }
 }
 

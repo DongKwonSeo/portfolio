@@ -1,17 +1,20 @@
 import React from "react";
 
-const MealsItem = ({ meal }) => {
+const TableMealsItem = ({ meal, isopen, setisopen }) => {
+  const modal = () => {
+    setisopen(!isopen);
+  };
   return (
     <>
-      <tr>
+      <tr onClick={modal}>
         <td>{meal.create}</td>
-        <td>{meal.hour}</td>
+        <td>{meal.time}</td>
         <td>{meal.meal_type}</td>
-        <td>{meal.mealDesc}</td>
+        <td>{meal.meal_desc}</td>
         <td>{meal.calorie}</td>
       </tr>
     </>
   );
 };
 
-export default MealsItem;
+export default TableMealsItem;

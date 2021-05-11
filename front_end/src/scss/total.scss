@@ -1,0 +1,36 @@
+.total {
+  padding: 150px 0;
+  &__container {
+    width: 1200px;
+    margin: 0 auto;
+  }
+  &__wrapper {
+    padding: 100px 0;
+  }
+  &__wrap {
+    display: flex;
+    justify-content: center;
+  }
+  &__wrap2 {
+    border: 1px solid #000;
+  }
+  &__box {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__title {
+    font-size: 20px;
+  }
+  &__h2 {
+    text-decoration: underline;
+    cursor: pointer;
+    display: block;
+    color: #000;
+  }
+  &__h2:hover {
+    color: blue;
+  }
+
+  // &__wrap2 {
+  // }
+}

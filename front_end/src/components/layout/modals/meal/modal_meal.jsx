@@ -1,6 +1,6 @@
 import React from "react";
 
-const Meal = (props) => {
+const ModalMeal = (props) => {
   return (
     <div className>
       <h1>
@@ -42,4 +42,4 @@ const Meal = (props) => {
   );
 };
 
-export default Meal;
+export default ModalMeal;

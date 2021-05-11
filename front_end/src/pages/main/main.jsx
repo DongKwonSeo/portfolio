@@ -1,8 +1,9 @@
 import React from "react";
-import List from "./total_list/total_list";
+import List from "./data_list/data_list";
 import Meals from "./table/table_meals";
 import Workout from "./table/table_workouts";
 import "../../scss/layout.scss";
+import "../../scss/common/data_list.scss";
 const Main = () => {
   return (
     <section className="section">

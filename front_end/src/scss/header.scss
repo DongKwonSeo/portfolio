@@ -1,17 +1,37 @@
+$nav_li_color: #fff;
+$nav_li_on_color: red;
+$inner_bg: #4f6b68;
+$header_bg: #9dd5cf;
+
 .header {
   z-index: 9999;
   position: fixed;
   top: 0;
   width: 100%;
-  background: yellow;
-  &__nav {
-    display: flex;
-    justify-content: space-between;
+  background: $header_bg;
+  &__container {
+    width: 1200px;
+    margin: 0 auto;
   }
-}
-
-.login__img {
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  &__logo {
+    text-align: center;
+  }
+  &__inner {
+    background: $inner_bg;
+  }
+  &__nav ul {
+    display: flex;
+    justify-content: center;
+  }
+  &__nav ul li {
+    margin-right: 15px;
+    color: $nav_li_color;
+    cursor: pointer;
+  }
+  &__nav ul li:hover {
+    color: $nav_li_on_color;
+  }
+  &__nav ul a.on li {
+    color: $nav_li_on_color;
+  }
 }

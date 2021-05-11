@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import MealsItem from "./table_meals_item";
+import ModalMeal from "../../../components/layout/modals/meal/modal_meal";
+import TableMealsItem from "./table_meals_item";
 
-const Meals = (props) => {
+const TableMeals = (props) => {
+  const [isopen, setisopen] = useState(false);
   const [meals, setMeals] = useState([
     {
       create: "02.12",
-      // id: "1",
-      // hour: null,
+      _id: "1",
       meal_type: "아침",
       mealDesc: ["수박"],
       calorie: 200,
@@ -19,25 +20,32 @@ const Meals = (props) => {
       .then((result) => {
         console.log(result);
         console.log({ data: result.data.data });
-        const meals = result.data.data;
+        let meals = result.data.data;
         for (let i = 0; i < meals.length; i++) {
           const item = meals[i];
           // item.id = i;
           console.log(item);
+          item.time = Time(item.create);
           item.create = getMD(item.create);
           // console.log({ item });
           //날짜
           // getMD()
           //칼로리
           item.calorie = item.calorie + "kal";
+          meals[i] = item;
         }
         setMeals(meals);
       });
   }, []);
   function getMD(create) {
-    const d = new Date(create); //지금 시간? 데이터 객체를 지금시간으로 만들어 준다
+    const d = new Date(create);
     const md = d.getMonth() + 1 + "." + d.getDate(); // 데이터 객체 에서 월 , 일 만 가지고 와서 문자열로 만들어 준다
     return md;
+  }
+  function Time(create) {
+    const time = create.split("T")[1];
+    const time2 = time.split(".")[0];
+    return time2;
   }
 
   return (
@@ -53,13 +61,21 @@ const Meals = (props) => {
           </tr>
         </thead>
         <tbody>
-          {meals.map((meal, a) => (
-            <MealsItem key={a} meal={meal} />
+          {meals.map((meal) => (
+            <TableMealsItem
+              key={meal._id}
+              meal={meal} //
+              isopen={isopen}
+              setisopen={setisopen}
+            />
           ))}
         </tbody>
       </table>
+
+      {/* modal */}
+      <>{isopen ? <ModalMeal /> : null}</>
     </>
   );
 };
 
-export default Meals;
+export default TableMeals;

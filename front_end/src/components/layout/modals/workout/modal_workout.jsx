@@ -1,10 +1,10 @@
 import React from "react";
-import "../../scss/modal_workout.scss";
+import "../../../../scss/common/modal.scss";
 const ModalWorkout = ({ create, workout_type, hour, workout_calorie }) => {
   return (
     <div className="modal">
       <div className="modal__wrap">
-        <table>
+        <table className="modal__table">
           <thead>
             <tr>
               <th>날짜</th>
@@ -22,24 +22,19 @@ const ModalWorkout = ({ create, workout_type, hour, workout_calorie }) => {
             </tr>
           </tbody>
         </table>
-        {/* table */}
 
-        <div className="modal__comment">
-          <div className="comment">
-            <h2 className="comment__title">코멘트 남기기</h2>
-            <input
-              className="comment__input"
-              type="text"
-              placeholder="댓글을 입렵해주세요!"
-            />
-          </div>
-          <div className="div">
+        <form action="#" className="comment">
+          <h2 className="comment__title">코멘트 남기기</h2>
+          <input
+            className="comment__input"
+            type="text"
+            placeholder="댓글을 입렵해주세요!"
+          />
+          <button className="comment__sumit">등록</button>
+          <div className="comment__list">
             <h2>댓글1</h2>
-            <form action="#">
-              <input type="text" placeholder="댓글을 입렵해주세요!" />
-            </form>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

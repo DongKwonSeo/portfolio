@@ -1,0 +1,24 @@
+$section_padding: 150px 0;
+$create_workOut_padding: 150px 0;
+.section_padding {
+  padding: $section_padding;
+}
+
+.create_workOut {
+  padding: $create_workOut_padding;
+  &__title {
+    font-size: 30px;
+  }
+  &__container {
+    width: 1200px;
+    margin: 0 auto;
+  }
+  &__wrap {
+    display: flex;
+    justify-content: center;
+  }
+  &__button {
+    text-align: center;
+    padding: 20px 0;
+  }
+}
