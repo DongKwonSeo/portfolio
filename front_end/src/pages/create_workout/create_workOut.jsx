@@ -66,16 +66,19 @@ const CreateWorkOut = (props) => {
           <div className="create_workOut__from">
             <Postinput
               title={"운동종류"}
+              value={workout_type}
               onchange={type_change}
               placeholder={"운동을 입력해주세요"}
             />
             <Postinput
               title={"운동 소요시간"}
+              value={hour}
               onchange={time_change}
               placeholder={"소요시간을 입력해주세요"}
             />
             <Postinput
               title={"소모 칼로리"}
+              value={workout_calorie}
               onchange={claorie_change}
               placeholder={"소모 칼로리를 입력해주세요 ex)kcal"}
             />

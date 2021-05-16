@@ -1,6 +1,5 @@
 @import "./reset.css";
 
-
 .aside {
   background: blue;
   position: fixed;
@@ -8,7 +7,9 @@
   width: 5%;
   padding-top: 100px;
 }
-
+.section {
+  padding: 200px 0;
+}
 .wrapper {
   display: flex;
 }
@@ -60,7 +61,6 @@ td {
   padding: 50px 0;
   text-align: center;
 }
-
 
 .input_padding {
   padding: 15px 0;

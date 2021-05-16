@@ -1,3 +1,15 @@
 .post__meals {
+  padding: 50px 0;
   text-align: center;
+  &__padding {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+  }
+  &__checkBox {
+    padding: 30px 0;
+  }
+  &__checkBox .radio {
+    margin-right: 15px;
+  }
 }

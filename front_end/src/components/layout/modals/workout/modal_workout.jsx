@@ -1,6 +1,6 @@
 import React from "react";
 import "../../../../scss/common/modal.scss";
-const ModalWorkout = ({ create, workout_type, hour, workout_calorie }) => {
+const Modals = ({ create, workout_type, hour, workout_calorie }) => {
   return (
     <div className="modal">
       <div className="modal__wrap">
@@ -15,7 +15,7 @@ const ModalWorkout = ({ create, workout_type, hour, workout_calorie }) => {
           </thead>
           <tbody>
             <tr>
-              <td>{create}</td>
+              <td>{create}나나나</td>
               <td>{workout_type}</td>
               <td>{hour}</td>
               <td>{workout_calorie}</td>
@@ -32,7 +32,7 @@ const ModalWorkout = ({ create, workout_type, hour, workout_calorie }) => {
           />
           <button className="comment__sumit">등록</button>
           <div className="comment__list">
-            <h2>댓글1</h2>
+            <h2 className="comment__title">댓글1</h2>
           </div>
         </form>
       </div>
@@ -40,4 +40,4 @@ const ModalWorkout = ({ create, workout_type, hour, workout_calorie }) => {
   );
 };
 
-export default ModalWorkout;
+export default Modals;

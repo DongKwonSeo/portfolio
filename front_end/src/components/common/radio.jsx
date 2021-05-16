@@ -1,7 +1,7 @@
 import React from "react";
 import "../../scss/common/check_box.scss";
 
-const CheckBox = ({ type, onchange, name }) => {
+const Radio = ({ type, onchange, name }) => {
   return (
     <>
       <label htmlFor={type} className="radio">
@@ -12,6 +12,7 @@ const CheckBox = ({ type, onchange, name }) => {
           value={type}
           name={name}
           onChange={onchange}
+          // checked={check}
         />
         <span className="radio__value">{type}</span>
       </label>
@@ -19,4 +20,4 @@ const CheckBox = ({ type, onchange, name }) => {
   );
 };
 
-export default CheckBox;
+export default Radio;

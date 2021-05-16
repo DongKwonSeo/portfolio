@@ -7,8 +7,8 @@ const TableMeals = (props) => {
   const [isopen, setisopen] = useState(false);
   const [meals, setMeals] = useState([
     {
+      _id: 1,
       create: "02.12",
-      _id: "1",
       meal_type: "아침",
       mealDesc: ["수박"],
       calorie: 200,
@@ -63,10 +63,10 @@ const TableMeals = (props) => {
         <tbody>
           {meals.map((meal) => (
             <TableMealsItem
-              key={meal._id}
               meal={meal} //
               isopen={isopen}
               setisopen={setisopen}
+              key={meal._id}
             />
           ))}
         </tbody>

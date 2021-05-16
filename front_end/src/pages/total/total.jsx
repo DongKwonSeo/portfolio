@@ -35,7 +35,7 @@ const Total = (props) => {
   const [timeLine, settimeLine] = useState([
     {
       id: "1",
-      color: "빨강",
+      color: <i className="fas fa-dumbbell"></i>,
       type: "Meal",
       desc: "햄버거",
       cal: "100",
@@ -43,7 +43,7 @@ const Total = (props) => {
     },
     {
       id: "2",
-      color: "빨강",
+      color: <i className="fas fa-apple-alt"></i>,
       type: "Meal",
       desc: "햄버거",
       cal: "100",

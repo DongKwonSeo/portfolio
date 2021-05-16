@@ -1,6 +1,6 @@
 import React from "react";
 
-const TableMealsItem = ({ meal, isopen, setisopen }) => {
+const TableMealsItem = ({ meal, isopen, setisopen, }) => {
   const modal = () => {
     setisopen(!isopen);
   };

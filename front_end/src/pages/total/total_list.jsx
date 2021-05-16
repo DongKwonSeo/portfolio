@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../../scss/common/total_list.scss";
 const TotalList = ({ total }) => {
   return (
