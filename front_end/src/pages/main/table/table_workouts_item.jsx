@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 // import ModalWorkout from "../../../modals/workout/modal_workout";
 
-const WorkoutsItem = ({
-  work,
-  setModal,
-  isopen,
-  setisopen,
-  setModalWorkoutState,
-}) => {
+const WorkoutsItem = ({ work, setModal, isopen, setisopen, setmodalState }) => {
   // const [isopen, setisopen] = useState(false);
   return (
     <tr
@@ -15,12 +9,9 @@ const WorkoutsItem = ({
         // () => setisopen(!isopen);
         () => {
           setisopen(!isopen);
-          setModalWorkoutState({
-            // create: work.create,
-            // workout_type: work.workout_type,
-            // hour: work.hour,
-            // workout_calorie: work.workout_calorie,
-            id: work.id,
+          setmodalState({
+            type: "workout",
+            _id: work._id,
           });
         }
 

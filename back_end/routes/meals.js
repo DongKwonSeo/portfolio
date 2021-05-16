@@ -6,14 +6,15 @@ const {
   createMeal,
   putMeal,
   getCalorie,
+  getOneMeals,
 } = require("../controller/meals");
 const router = express.Router();
 
 router.get("/", getmeals);
 router.get("/cal", getCalorie);
+router.route("/:id").get(getOneMeals);
 router.post("/", createMeal);
 router.put("/:id", putMeal);
-
 
 module.exports = router;
 

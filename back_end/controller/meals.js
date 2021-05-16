@@ -6,11 +6,25 @@ const User = require("../models/user");
 
 const { Comment } = require("../models/comment");
 const getCurrentDate = require("../lib/getCurrentDate");
+const meals = require("../models/meals");
 
 // 전체 식단 리스트 조회
 // GET api/meals/
 exports.getmeals = asyncHandler(async (req, res, next) => {
   const meals = await Meals.find();
+  if (!meals) {
+    next(new ErrorResponse("Meals data not found", 404));
+  }
+  res.status(200).json({
+    success: true,
+    data: meals,
+  });
+});
+
+// GET api/meals/:id
+exports.getOneMeals = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  const meals = await Meals.findById(id);
   if (!meals) {
     next(new ErrorResponse("Meals data not found", 404));
   }
@@ -58,14 +72,16 @@ exports.putMeal = asyncHandler(async (req, res, next) => {
   let comment = new Comment({
     comment: comments,
     user: user_id,
-    ons: meal._id,
+    content: meal._id,
     onModel: "Meals",
   });
 
-  [meal, comment] = await Promise.all([
-    Meals.updateOne({ _id: meal._id }, { $push: { comments: comment } }),
-    comment.save(),
-  ]);
+  meals = await Meals.findByIdAndUpdate(
+    { _id: meals._id },
+    { $push: { comments: comment } },
+    { new: true, runValidators: true }
+  );
+  await comment.save();
 
   res.status(200).json({
     success: true,

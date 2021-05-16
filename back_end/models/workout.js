@@ -14,7 +14,7 @@ const WorkoutSchema = new mongoose.Schema({
     type: Number,
     trim: true,
   },
-  workout_comments: {
+  comments: {
     type: [CommentSchema],
     default: [],
   },

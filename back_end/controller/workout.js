@@ -24,6 +24,21 @@ exports.getWorkOut = asyncHandler(async (req, res, next) => {
   });
 });
 
+// GET api/workouts:id
+//운동 리스트 가져오기
+
+exports.getOneWorkOut = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  const workout = await Workout.findById(id);
+  if (!workout) {
+    next(new ErrorResponse("Workout data not found", 404));
+  }
+  res.status(200).json({
+    success: true,
+    data: workout,
+  });
+});
+
 // / 운동 정보 등록
 
 // //  POST api/workouts`
@@ -70,7 +85,7 @@ exports.putWorkout = asyncHandler(async (req, res, next) => {
   // [workout,comment] = await
   workout = await Workout.findByIdAndUpdate(
     { _id: workout._id },
-    { $push: { workout_comments: comment } },
+    { $push: { comments: comment } },
     { new: true, runValidators: true }
   );
   await comment.save();

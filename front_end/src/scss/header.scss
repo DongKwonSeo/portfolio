@@ -27,11 +27,15 @@ $header_bg: #9dd5cf;
     display: flex;
     justify-content: center;
   }
+  &__nav ul a {
+    text-decoration: none;
+  }
   &__nav ul li {
     margin-right: 15px;
     color: $nav_li_color;
     cursor: pointer;
     font-size: 20px;
+    text-decoration: none;
   }
 
   &__nav ul li:hover {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import WorkoutsItem from "./table_workouts_item";
-import Modals from "../../../components/layout/modals/workout/modal_workout";
+import Modals from "../../../components/layout/modals/modal";
 import axios from "axios";
 /*
 {
@@ -32,14 +32,9 @@ const Workout = (props) => {
     },
   ]);
   const [isopen, setisopen] = useState(false);
-  const [modalWorkoutState, setModalWorkoutState] = useState({
-    // create: "-_-?;;;",
-    // workout_type: "-_-?;;;",
-    // hour: "-_-?;;;",
-    // workout_calorie: "-_-?;;;",
+  const [modalState, setmodalState] = useState({
     _id: "1",
   });
-  const [modal, setModal] = useState("");
 
   useEffect(() => {
     // 저장한걸 get http://localhost:3601/api/workout 가지고 온다
@@ -83,26 +78,14 @@ const Workout = (props) => {
             <WorkoutsItem
               key={work._id} //
               work={work}
-              setModal={setModal}
               isopen={isopen}
               setisopen={setisopen}
-              setModalWorkoutState={setModalWorkoutState}
+              setmodalState={setmodalState}
             />
           ))}
         </tbody>
       </table>
-      {isopen ? (
-        <Modals
-          // create={modalWorkoutState.create}
-          // workout_type={modalWorkoutState.workout_type}
-          // hour={modalWorkoutState.hour}
-          // workout_calorie={modalWorkoutState.workout_calorie}
-          id={modalWorkoutState._id}
-        />
-      ) : null}
-
-      <br />
-      <p>{modal}</p>
+      {isopen ? <Modals id={modalState._id} type={modalState.type} /> : null}
     </>
   );
 };

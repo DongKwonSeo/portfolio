@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import ModalMeal from "../../../components/layout/modals/meal/modal_meal";
+import Modals from "../../../components/layout/modals/modal";
+
 import TableMealsItem from "./table_meals_item";
 
 const TableMeals = (props) => {
@@ -14,6 +15,10 @@ const TableMeals = (props) => {
       calorie: 200,
     },
   ]);
+  const [modalState, setmodalState] = useState({
+    _id: "1",
+  });
+
   useEffect(() => {
     axios
       .get("http://localhost:3601/api/meals") //
@@ -37,6 +42,9 @@ const TableMeals = (props) => {
         setMeals(meals);
       });
   }, []);
+
+  
+
   function getMD(create) {
     const d = new Date(create);
     const md = d.getMonth() + 1 + "." + d.getDate(); // 데이터 객체 에서 월 , 일 만 가지고 와서 문자열로 만들어 준다
@@ -67,13 +75,16 @@ const TableMeals = (props) => {
               isopen={isopen}
               setisopen={setisopen}
               key={meal._id}
+              setmodalState={setmodalState}
             />
           ))}
         </tbody>
       </table>
-
+        
       {/* modal */}
-      <>{isopen ? <ModalMeal /> : null}</>
+      <>
+        {isopen ? <Modals id={modalState._id} type={modalState.type} /> : null}
+      </>
     </>
   );
 };
