@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import TotalList from "./total_list";
 import "../../scss/total.scss";
 import TotalTimeline from "./total_timeline";
+import "../../scss/reset.css";
 
 const Total = (props) => {
   const [total_list, settotal_list] = useState([
@@ -35,15 +36,15 @@ const Total = (props) => {
   const [timeLine, settimeLine] = useState([
     {
       id: "1",
-      color: <i className="fas fa-dumbbell"></i>,
-      type: "Meal",
-      desc: "햄버거",
+      icon: <i className="fas fa-dumbbell"></i>,
+      type: "WorkOut",
+      desc: "조깅",
       cal: "100",
       create: "2020.05.05",
     },
     {
       id: "2",
-      color: <i className="fas fa-apple-alt"></i>,
+      icon: <i className="fas fa-apple-alt"></i>,
       type: "Meal",
       desc: "햄버거",
       cal: "100",
@@ -65,13 +66,35 @@ const Total = (props) => {
               <h2 className="total__h2">자세히 확인하기</h2>
             </Link>
           </div>
+
           <div className="total__wrap2">
+            <table className="total__wrap2__table">
+              <thead className="total__wrap2__thead">
+                <tr>
+                  <th>아이콘</th>
+                  <th>TYPE</th>
+                  <th>DESC</th>
+                  <th>CAL</th>
+                  <th>CREATE</th>
+                </tr>
+              </thead>
+              <tbody>
+                {timeLine.map((timeLines) => (
+                  <TotalTimeline
+                    timeLines={timeLines} //
+                    key={timeLines.id}
+                  />
+                ))}
+              </tbody>
+            </table>
+
+            {/* 
             {timeLine.map((timeLines) => (
               <TotalTimeline
                 timeLines={timeLines} //
                 key={timeLines.id}
               />
-            ))}
+            ))} */}
           </div>
         </div>
       </div>

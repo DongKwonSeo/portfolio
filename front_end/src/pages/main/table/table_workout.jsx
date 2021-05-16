@@ -37,7 +37,6 @@ const Workout = (props) => {
   });
 
   useEffect(() => {
-    // 저장한걸 get http://localhost:3601/api/workout 가지고 온다
     axios.get("http://localhost:3601/api/workout").then((result) => {
       // console.log({ result });
       // console.log({ data: result.data.data });

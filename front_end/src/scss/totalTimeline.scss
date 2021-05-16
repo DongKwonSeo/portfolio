@@ -12,3 +12,21 @@
     font-size: 20px;
   }
 }
+
+.total__wrap2 {
+  border: none;
+  &__table {
+    border: 1px solid #000000 !important;
+    border-collapse: separate;
+    border-radius: 30px;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+  }
+  &__table th,
+  td {
+    padding: 1em;
+    background: #ddd;
+    border-bottom: 2px solid white;
+  }
+}
