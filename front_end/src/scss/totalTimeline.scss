@@ -17,7 +17,6 @@
   border: none;
   &__table {
     border: 1px solid #000000 !important;
-    border-collapse: separate;
     border-radius: 30px;
     width: 100%;
     overflow: hidden;
@@ -25,8 +24,9 @@
   }
   &__table th,
   td {
-    padding: 1em;
+    padding: 15px;
     background: #ddd;
+    border: none;
     border-bottom: 2px solid white;
   }
 }

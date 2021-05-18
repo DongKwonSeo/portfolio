@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 // import ModalWorkout from "../../../modals/workout/modal_workout";
 
-const WorkoutsItem = ({ work, setModal, isopen, setisopen, setmodalState }) => {
+const WorkoutsItem = ({
+  work, //
+  setModal,
+  isopen,
+  setisopen,
+  setmodalState,
+}) => {
   const modal = () => {
     setisopen(!isopen);
     setmodalState({

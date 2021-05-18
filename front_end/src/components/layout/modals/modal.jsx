@@ -134,6 +134,8 @@ const Modals = ({ id, type }) => {
       user_id: "60a125dfa801204acd2810d5",
     });
   };
+
+  
   return (
     <div className="modal">
       <div className="modal__wrap">
@@ -180,6 +182,7 @@ const Modals = ({ id, type }) => {
           </table>
         )}
 
+        {/* 댓글  */}
         <form action="#" className="comment">
           <h2 className="comment__title">코멘트 남기기</h2>
           <input

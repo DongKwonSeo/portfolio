@@ -1,7 +1,5 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./scss/layout.scss";
-// import Workout from "./modals/workout/workout";
-// import Login from "./pages/login/login";
 import Header from "./components/layout/header/header";
 import Main from "./pages/main/main";
 import CreateMeal from "./pages/create_meal/create_meal";

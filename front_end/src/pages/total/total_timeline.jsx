@@ -1,27 +1,24 @@
 import React from "react";
 import "../../scss/totalTimeline.scss";
-const TotalTimeline = ({ timeLines }) => {
+const TotalTimeline = ({
+  timeLines,
+  setModal,
+  isopen,
+  setisopen,
+  setmodalState,
+}) => {
+  const modal = () => {
+    setisopen(!isopen);
+    setmodalState({ type: timeLines.type, _id: timeLines._id });
+  };
   return (
-    <tr>
+    <tr onClick={modal}>
       <td>{timeLines.icon}</td>
-      <td>{timeLines.type}</td>
+      <td>{timeLines.types}</td>
       <td>{timeLines.desc}</td>
       <td>{timeLines.cal}</td>
       <td>{timeLines.create}</td>
     </tr>
-
-    // <div className="totalTimeline">
-    //   <div className="totalTimeline__wrap">
-
-    //     <ul className="totalTimeline__list">
-    //       <li>{timeLines.color}</li>
-    //       <li>{timeLines.type}</li>
-    //       <li>{timeLines.desc}</li>
-    //       <li>{timeLines.cal}Kcal</li>
-    //       <li>{timeLines.create}</li>
-    //     </ul>
-    //   </div>
-    // </div>
   );
 };
 

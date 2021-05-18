@@ -1,25 +1,8 @@
 import React, { useState, useEffect } from "react";
 import WorkoutsItem from "./table_workouts_item";
 import Modals from "../../../components/layout/modals/modal";
+import "../../../scss/layout.scss";
 import axios from "axios";
-/*
-{
-    "success": true,
-    "data": [
-        {
-            "create": "2021-03-11T01:36:41.391Z",
-            "_id": "6048f59c2afd81eebb2130d9",
-            "workout_type": "헬스",
-            "hour": 3,
-            "workout_calorie": 135,
-            "user": "6043c0fb032f6022cda5c18a",
-            "workout_comments": [],
-            "__v": 0
-        },
-        ...
-    ]
-}
-*/
 
 const Workout = (props) => {
   const [workout, setWorkout] = useState([
@@ -75,8 +58,8 @@ const Workout = (props) => {
         <tbody>
           {workout.map((work) => (
             <WorkoutsItem
-              key={work._id} //
               work={work}
+              key={work._id} //
               isopen={isopen}
               setisopen={setisopen}
               setmodalState={setmodalState}
