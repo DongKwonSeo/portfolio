@@ -91,7 +91,3 @@ exports.putWorkout = asyncHandler(async (req, res, next) => {
   await comment.save();
   res.status(200).json({ success: true, workout, comment });
 });
-
-//   운동시간 가져오기
-
-// GET api/worksouts/hours/:type (type: m, w, d)

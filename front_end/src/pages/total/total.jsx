@@ -43,14 +43,6 @@ const Total = (props) => {
     //   cal: "100",
     //   create: "2020.05.05",
     // },
-    // {
-    //   id: "2",
-    //   icon: <i className="fas fa-apple-alt"></i>,
-    //   type: "Meal",
-    //   desc: "햄버거",
-    //   cal: "100",
-    //   create: "2020.05.05",
-    // },
   ]);
   const [isopen, setisopen] = useState(false);
   const [modalState, setmodalState] = useState({
@@ -60,11 +52,18 @@ const Total = (props) => {
   useEffect(() => {
     getTotal();
   }, []);
-  function getMD(create) {
+
+  const getMD = (create) => {
     const d = new Date(create);
     const md = d.getFullYear() + "." + (d.getMonth() + 1) + "." + d.getDate(); // 데이터 객체 에서 월 , 일 만 가지고 와서 문자열로 만들어 준다
     return md;
-  }
+  };
+
+  // function getMD(create) {
+  //   const d = new Date(create);
+  //   const md = d.getFullYear() + "." + (d.getMonth() + 1) + "." + d.getDate(); // 데이터 객체 에서 월 , 일 만 가지고 와서 문자열로 만들어 준다
+  //   return md;
+  // }
   // 두가지 데이터를  한 곳으로 불러 오는 방법
   const getTotal = async () => {
     try {
@@ -74,14 +73,36 @@ const Total = (props) => {
       // meals.time = Time(meals.create);
 
       for (let i = 0; i < meals.length; i++) {
-        meals[i].icon = <i className="fas fa-apple-alt"></i>;
-        meals[i].type = "meals";
-        meals[i].types = "Meal";
-        meals[i].desc = meals[i].meal_desc;
-        meals[i].cal = meals[i].calorie;
+        const obj = {
+          _id: meals[i]._id,
+          icon: <i className="fas fa-apple-alt"></i>,
+          type: "meals",
+          types: "Meal",
+          desc: meals[i].meal_desc,
+          cal: meals[i].calorie,
+          create: (meals[i].create = getMD(meals[i].create)),
+        };
+        //  types: "Meal", 변수명 바꾸기 ex) display_type 보여주기 위한 type ()!
+
+        // meals[i].type = "";
+        // meals[i].types = "Meal";
+        // meals[i].desc = meals[i].meal_desc;
+        // meals[i].cal = meals[i].calorie;
         //크리에이트
         meals[i].create = getMD(meals[i].create);
-        timelineData.push(meals[i]);
+        timelineData.push(obj);
+
+        // timelineData.push(meals[i]);
+
+        // for (let i = 0; i < meals.length; i++) {
+        //   meals[i].icon = <i className="fas fa-apple-alt"></i>;
+        //   meals[i].type = "meals";
+        //   meals[i].types = "Meal";
+        //   meals[i].desc = meals[i].meal_desc;
+        //   meals[i].cal = meals[i].calorie;
+        //   //크리에이트
+        //   meals[i].create = getMD(meals[i].create);
+        //   timelineData.push(meals[i]);
       }
       // work out api
       const response2 = await axios.get(`http://localhost:3601/api/workout`);
@@ -94,9 +115,9 @@ const Total = (props) => {
           icon: <i className="fas fa-dumbbell"></i>,
           type: "workout",
           types: "WorkOut",
-          desc: workout[i].workout_type,
-
+          desc: [workout[i].workout_type],
           cal: workout[i].workout_calorie,
+          create: (workout[i].create = getMD(workout[i].create)),
           // create:
         };
 

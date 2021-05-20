@@ -9,11 +9,11 @@ const WorkoutsItem = ({
   setmodalState,
 }) => {
   const modal = () => {
-    setisopen(!isopen);
-    setmodalState({
-      type: "workout",
-      _id: work._id,
-    });
+    // setisopen(!isopen);
+    // setmodalState({
+    //   type: "workout",
+    //   _id: work._id,
+    // });
   };
   return (
     <tr onClick={modal}>

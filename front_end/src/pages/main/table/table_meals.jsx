@@ -15,7 +15,7 @@ const TableMeals = (props) => {
       calorie: 200,
     },
   ]);
-  const [modalState, setmodalState] = useState({
+  const [contentId, setContentId] = useState({
     _id: "1",
   });
 
@@ -42,8 +42,6 @@ const TableMeals = (props) => {
         setMeals(meals);
       });
   }, []);
-
-  
 
   function getMD(create) {
     const d = new Date(create);
@@ -75,16 +73,14 @@ const TableMeals = (props) => {
               isopen={isopen}
               setisopen={setisopen}
               key={meal._id}
-              setmodalState={setmodalState}
+              setContentId={setContentId}
             />
           ))}
         </tbody>
       </table>
-        
+
       {/* modal */}
-      <>
-        {isopen ? <Modals id={modalState._id} type={modalState.type} /> : null}
-      </>
+      <>{isopen ? <Modals id={contentId._id} type={contentId.type} /> : null}</>
     </>
   );
 };

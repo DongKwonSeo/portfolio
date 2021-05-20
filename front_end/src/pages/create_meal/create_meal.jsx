@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import Button from "../../components/common/button";
 import Postinput from "../../components/common/post_input";
@@ -16,14 +15,19 @@ const CreateMeal = (props) => {
   const [file, setfile] = useState(null);
   const save = async (e) => {
     e.preventDefault();
-
+    const config = { header: { "content-type": "multipart/form-data" } };
     await axios
-      .post("http://localhost:3601/api/meals", {
-        meal_desc: mealDesc,
-        calorie: calorie,
-        meal_type: meal_type,
-        user_id: "6043c0fb032f6022cda5c18a",
-      })
+      .post(
+        "http://localhost:3601/api/meals",
+        {
+          meal_desc: mealDesc,
+          calorie: calorie,
+          meal_type: meal_type,
+          user_id: "6043c0fb032f6022cda5c18a",
+          file: file,
+        },
+        config
+      )
       .then((response) => {
         console.log(response.data);
         // response
@@ -99,10 +103,14 @@ const CreateMeal = (props) => {
     const Image = URL.createObjectURL(file);
     setImage(Image);
   };
+  const imgtag = useRef();
   const onfileClick = () => {
-    const imgtag = document.getElementById("test");
     imgtag.click();
   };
+  // const onfileClick = () => {
+  //   const imgtag = document.getElementById("test");
+  //   imgtag.click();
+  // };
 
   // 리액트 ref 이용해서 객체 선택 !
   // URL 해야 IMG 입력 값을 넣어줘야 한다
@@ -122,6 +130,7 @@ const CreateMeal = (props) => {
             <div className="post__meals__wrap">
               <label htmlFor="test">
                 <input
+                  ref={imgtag}
                   id="test"
                   hidden
                   type="file"

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../../../scss/common/modal.scss";
 import axios from "axios";
 // import "../../../../scss/common/modal.scss";
 const Modals = ({ id, type }) => {
+  const commentId = useRef(1);
   const [workout, setWorkout] = useState({
     create: "02.12",
     workout_type: "조깅",
@@ -29,7 +30,7 @@ const Modals = ({ id, type }) => {
   ]);
 
   const [postcomments, setpostcomments] = useState({
-    comments: "",
+    comment: "",
     user_id: "60a125dfa801204acd2810d5",
   });
 
@@ -116,26 +117,29 @@ const Modals = ({ id, type }) => {
     return time2;
   }
 
-  const sand = () => {
-    axios
-      .put(`http://localhost:3601/api/${type}/${id}`, postcomments) //
-      .then((result) => {
-        getData();
-        setpostcomments({
-          comments: "",
-        });
-      });
-    // comments": "수고 하셨습니다",
+  const sand = async () => {
+    try {
+      // const response = await axios.put(
+      //   `http://localhost:3601/api/${type}/${id}`,
+      //   postcomments
+      // );
+      // getData();
+      setcomments((state) => state.concat(postcomments));
+      console.log(comments);
+    } catch (e) {
+      console.log(e);
+    }
+
     // "user_id": "60a125dfa801204acd2810d5"
   };
   const commet_Change = (e) => {
     setpostcomments({
-      comments: e.target.value,
-      user_id: "60a125dfa801204acd2810d5",
+      comment: e.target.value,
+      _id: "60a125dfa801204acd2810d5",
     });
+    console.log(postcomments);
   };
 
-  
   return (
     <div className="modal">
       <div className="modal__wrap">
@@ -175,7 +179,7 @@ const Modals = ({ id, type }) => {
               <tr>
                 <td>{meals.create}</td>
                 <td>{meals.meal_type}</td>
-                <td>{meals.meal_desc}</td>
+                <td>{meals.mealDesc}</td>
                 <td>{meals.calorie}</td>
               </tr>
             </tbody>
@@ -183,14 +187,14 @@ const Modals = ({ id, type }) => {
         )}
 
         {/* 댓글  */}
-        <form action="#" className="comment">
+        <form action="#" className="comment" onSubmit={sand}>
           <h2 className="comment__title">코멘트 남기기</h2>
           <input
             className="comment__input"
             type="text"
             placeholder="댓글을 입렵해주세요!"
             onChange={commet_Change}
-            value={postcomments.comments}
+            value={postcomments.comment}
           />
           <button className="comment__sumit" onClick={sand}>
             등록

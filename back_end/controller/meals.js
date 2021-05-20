@@ -129,12 +129,6 @@ exports.getCalorie = asyncHandler(async (req, res, next) => {
     console.error(e);
     res.status(500).send();
   }
-
-  // res.status(200).json({
-  //   success: true,
-  //   data: calorie,
-  // });
-  // console.log(calorie);
 });
 
 // 이미지 등록

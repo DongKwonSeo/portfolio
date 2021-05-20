@@ -11,12 +11,13 @@ const TotalTimeline = ({
     setisopen(!isopen);
     setmodalState({ type: timeLines.type, _id: timeLines._id });
   };
+
   return (
     <tr onClick={modal}>
       <td>{timeLines.icon}</td>
       <td>{timeLines.types}</td>
-      <td>{timeLines.desc}</td>
-      <td>{timeLines.cal}</td>
+      <td>{timeLines.desc.map((item) => item)}</td>
+      <td>{timeLines.cal}Kal</td>
       <td>{timeLines.create}</td>
     </tr>
   );
