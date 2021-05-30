@@ -72,12 +72,12 @@ exports.createWorkout = asyncHandler(async (req, res, next) => {
 
 //  PUT api/workouts/:id
 exports.putWorkout = asyncHandler(async (req, res, next) => {
-  const { comments, user_id } = req.body;
-  console.log(comments, user_id);
-  let workout = await Workout.findById(req.params.id);
+  const { comment, user_id } = req.body;
 
-  const comment = Comment({
-    comment: comments,
+  let workout = await Workout.findById(req.params.id);
+  // =>_id findOne({_id:req.params.id}) 
+  const comment1 = Comment({
+    comment: comment,
     user: user_id,
     content: workout._id,
     onModel: "Workout",
@@ -85,9 +85,9 @@ exports.putWorkout = asyncHandler(async (req, res, next) => {
   // [workout,comment] = await
   workout = await Workout.findByIdAndUpdate(
     { _id: workout._id },
-    { $push: { comments: comment } },
+    { $push: { comments: comment1 } },
     { new: true, runValidators: true }
   );
-  await comment.save();
-  res.status(200).json({ success: true, workout, comment });
+  await comment1.save();
+  res.status(200).json({ success: true, workout, comment1 });
 });

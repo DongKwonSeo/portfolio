@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../scss/common/modal.scss";
 import axios from "axios";
 // import "../../../../scss/common/modal.scss";
 const Modals = ({ id, type }) => {
-  const commentId = useRef(1);
   const [workout, setWorkout] = useState({
     create: "02.12",
     workout_type: "조깅",
@@ -16,7 +15,7 @@ const Modals = ({ id, type }) => {
     _id: 1,
     create: "02.12",
     meal_type: "아침",
-    mealDesc: ["수박"],
+    meal_desc: ["수박"],
     calorie: 200,
   });
   const [comments, setcomments] = useState([
@@ -31,13 +30,14 @@ const Modals = ({ id, type }) => {
 
   const [postcomments, setpostcomments] = useState({
     comment: "",
-    user_id: "60a125dfa801204acd2810d5",
+    user_id: "",
   });
 
   useEffect(() => {
     getData();
   }, []);
 
+  // Meals API 가져오기
   const getmeals = async () => {
     try {
       const response = await axios.get(`http://localhost:3601/api/meals/${id}`);
@@ -45,39 +45,14 @@ const Modals = ({ id, type }) => {
       meals.time = Time(meals.create);
       meals.create = getMD(meals.create);
 
-      meals.calorie = meals.calorie + "kal";
-
       setMeals(meals);
       setcomments(meals.comments);
     } catch (error) {
       console.log(error);
     }
-    // axios
-    //   .get(`http://localhost:3601/api/meals/${id}`) //
-    //   .then((result) => {
-    //     console.log(result);
-    //     console.log({ data: result.data.data });
-    //     let meals = result.data.data;
-
-    //     meals.time = Time(meals.create);
-    //     meals.create = getMD(meals.create);
-    //     // console.log({ item });
-    //     //날짜
-    //     // getMD()
-    //     //칼로리
-    //     meals.calorie = meals.calorie + "kal";
-
-    //     setMeals(meals);
-    //     setcomments(meals.comments);
-    //   });
   };
-  const getData = () => {
-    if (type === "meals") {
-      getmeals();
-    } else if (type === "workout") {
-      getWorkout();
-    }
-  };
+
+  // Workout API 가져오기
   const getWorkout = async () => {
     try {
       const response = await axios.get(
@@ -85,57 +60,53 @@ const Modals = ({ id, type }) => {
       );
       const workout = response.data.data;
       workout.create = getMD(workout.create);
-      workout.workout_calorie = workout.workout_calorie + "kal";
 
       setWorkout(workout);
       setcomments(workout.comments);
     } catch (error) {
       console.log(error);
     }
-    // await axios
-    //   .get(`http://localhost:3601/api/workout/${id}`) //
-    //   .then((result) => {
-    //     // console.log({ result });
-    //     // console.log({ data: result.data.data });
-    //     const workout = result.data.data;
-    //     workout.create = getMD(workout.create);
-    //     workout.workout_calorie = workout.workout_calorie + "kal";
-
-    //     setWorkout(workout);
-    //     setcomments(workout.comments);
-    //   });
   };
 
+  // Meals or Workout = 타입 분류
+  const getData = () => {
+    if (type === "meals") {
+      getmeals();
+    } else if (type === "workout") {
+      getWorkout();
+    }
+  };
+
+  // 날짜 만들기
   function getMD(create) {
     const d = new Date(create);
     const md = d.getMonth() + 1 + "." + d.getDate(); // 데이터 객체 에서 월 , 일 만 가지고 와서 문자열로 만들어 준다
     return md;
   }
+
   function Time(create) {
     const time = create.split("T")[1];
     const time2 = time.split(".")[0];
     return time2;
   }
 
-  const sand = async () => {
+  const comment_sumit = async (e) => {
+    e.preventDefault();
     try {
-      // const response = await axios.put(
-      //   `http://localhost:3601/api/${type}/${id}`,
-      //   postcomments
-      // );
-      // getData();
-      setcomments((state) => state.concat(postcomments));
-      console.log(comments);
+      await axios.put(`http://localhost:3601/api/${type}/${id}`, postcomments);
+      getData();
+      setpostcomments({
+        comment: "",
+        user_id: "",
+      });
     } catch (e) {
       console.log(e);
     }
-
-    // "user_id": "60a125dfa801204acd2810d5"
   };
   const commet_Change = (e) => {
     setpostcomments({
       comment: e.target.value,
-      _id: "60a125dfa801204acd2810d5",
+      user_id: "60a125dfa801204acd2810d5",
     });
     console.log(postcomments);
   };
@@ -159,7 +130,7 @@ const Modals = ({ id, type }) => {
                 <td>{workout.create}</td>
                 <td>{workout.workout_type}</td>
                 <td>{workout.hour}</td>
-                <td>{workout.workout_calorie}</td>
+                <td>{workout.workout_calorie}Kal</td>
               </tr>
             </tbody>
           </table>
@@ -179,15 +150,15 @@ const Modals = ({ id, type }) => {
               <tr>
                 <td>{meals.create}</td>
                 <td>{meals.meal_type}</td>
-                <td>{meals.mealDesc}</td>
-                <td>{meals.calorie}</td>
+                <td>{meals.meal_desc}</td>
+                <td>{meals.calorie}Kal</td>
               </tr>
             </tbody>
           </table>
         )}
 
         {/* 댓글  */}
-        <form action="#" className="comment" onSubmit={sand}>
+        <form action="#" className="comment" onSubmit={comment_sumit}>
           <h2 className="comment__title">코멘트 남기기</h2>
           <input
             className="comment__input"
@@ -196,9 +167,7 @@ const Modals = ({ id, type }) => {
             onChange={commet_Change}
             value={postcomments.comment}
           />
-          <button className="comment__sumit" onClick={sand}>
-            등록
-          </button>
+          <button className="comment__sumit">등록</button>
           <div className="comment__list">
             <h2 className="comment__title">{comments.length}</h2>
             <ul>

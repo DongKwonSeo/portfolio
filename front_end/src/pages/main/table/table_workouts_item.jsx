@@ -8,15 +8,15 @@ const WorkoutsItem = ({
   setisopen,
   setmodalState,
 }) => {
-  const modal = () => {
-    // setisopen(!isopen);
-    // setmodalState({
-    //   type: "workout",
-    //   _id: work._id,
-    // });
+  const toggleModal = () => {
+    setisopen(!isopen);
+    setmodalState({
+      type: "workout",
+      _id: work._id,
+    });
   };
   return (
-    <tr onClick={modal}>
+    <tr onClick={toggleModal}>
       <td>{work.create}</td>
       <td>{work.workout_type}</td>
       <td>{work.hour}</td>

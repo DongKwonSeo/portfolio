@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const path = require("path");
 const fileupload = require("express-fileupload");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
 const errorHandler = require("./middleware/error");
 const connectDB = require("./config/db");
@@ -21,6 +22,9 @@ app.use(cors());
 
 // bodyParser
 app.use(bodyParser.json());
+// cookieParser
+app.use(cookieParser())
+
 
 // fileupload
 app.use(fileupload());

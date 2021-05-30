@@ -39,7 +39,7 @@ exports.getOneMeals = asyncHandler(async (req, res, next) => {
 // POST api/user/:id/meals
 exports.createMeal = asyncHandler(async (req, res, next) => {
   let { meal_type, calorie, meal_desc, user_id } = req.body;
-  console.log(meal_type, calorie, meal_desc, user_id);
+
   try {
     let user = await User.findOne({ _id: user_id });
     if (!user) {
@@ -65,54 +65,30 @@ exports.createMeal = asyncHandler(async (req, res, next) => {
 // 식단 정보수정-댓글 -달기
 // PUT api/meals/:id
 exports.putMeal = asyncHandler(async (req, res, next) => {
-  const { comments, user_id } = req.body;
+  const { comment, user_id } = req.body;
 
   let meal = await Meals.findById(req.params.id);
 
-  let comment = new Comment({
-    comment: comments,
+  let comment1 = new Comment({
+    comment: comment,
     user: user_id,
     content: meal._id,
     onModel: "Meals",
   });
 
-  meals = await Meals.findByIdAndUpdate(
-    { _id: meals._id },
-    { $push: { comments: comment } },
+  meal = await Meals.findByIdAndUpdate(
+    { _id: meal._id },
+    { $push: { comments: comment1 } },
     { new: true, runValidators: true }
   );
-  await comment.save();
+  await comment1.save();
 
   res.status(200).json({
     success: true,
     meal,
-    comment,
+    comment1,
   });
 });
-
-// const meals = await Meals.findByIdAndUpdate(
-//   req.params.id, //
-//   req.body,
-//   {
-//     new: true,
-//     runValidators: true,
-//   }
-// );
-
-// try {
-//   let user = await User.findOne({ user_id });
-//   if (!user) {
-//     return res.status(404).send({
-//       message: "create new comments fail",
-//       error: "this user has already joined",
-//     });
-//   }
-//   const meals = await Meals.create({ comments, user_id });
-//   res.send({ message: "create new user success", meals });
-// } catch (e) {
-//   console.error(e);
-//   res.status(500).send();
-// }
 
 // 칼로리 가져오기
 // GET api/meals/cal
@@ -129,22 +105,6 @@ exports.getCalorie = asyncHandler(async (req, res, next) => {
     console.error(e);
     res.status(500).send();
   }
-});
-
-// 이미지 등록
-
-//  POST api/meals/:id/upload
-exports.mealImg = asyncHandler(async (req, res, next) => {
-  const { img, user_id } = req.body;
-  const mealImg = req.files.mealImg;
-
-  mealImg.mv("../uploads/" + mealImg.name, async (error) => {
-    if (error) {
-      console.log("could't find file");
-    } else {
-      console.log("mealsIMg file uploaded");
-    }
-  });
 });
 
 // {

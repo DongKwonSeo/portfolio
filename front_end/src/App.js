@@ -6,25 +6,26 @@ import CreateMeal from "./pages/create_meal/create_meal";
 import CreateWorkOut from "./pages/create_workout/create_workOut";
 import Home from "./pages/home/home";
 import Total from "./pages/total/total";
-import { store } from "../src/redux/store";
-import { Provider } from "react-redux";
+// import { store } from "../src/redux/store";
+// import { Provider } from "react-redux";
 
 // import Meal from "./modals/meal/meal";
 
 function App() {
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Home}></Route>
-          <Route path="/main" component={Main} />
-          <Route path="/total" component={Total} />
-          <Route path="/meal" component={CreateMeal} />
-          <Route path="/workout" component={CreateWorkOut} />
-        </Switch>
-      </BrowserRouter>
-    </Provider>
+    // <Provider store={store}>
+    <BrowserRouter>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={Home}></Route>
+        {/* <Route path="/main" component={Main} /> */}
+        <Route path="/total" component={Total} exact />
+        <Route path="/total/detail" component={Main} />
+        <Route path="/meal" component={CreateMeal} />
+        <Route path="/workout" component={CreateWorkOut} />
+      </Switch>
+    </BrowserRouter>
+    // </Provider>
   );
 }
 
