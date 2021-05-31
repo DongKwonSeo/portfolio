@@ -1,5 +1,5 @@
 import React from "react";
-import "../../scss/totalTimeline.scss";
+import "../../scss/total.scss";
 const TotalTimeline = ({
   timeLines,
   setModal,

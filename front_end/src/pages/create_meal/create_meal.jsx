@@ -140,6 +140,7 @@ const CreateMeal = (props) => {
 
               <Postinput
                 title={"음식종류"}
+                type={"text"}
                 value={mealDesc}
                 onchange={mealDesc_Change}
                 placeholder={"오늘 먹은 음식을 등록해주세요"}
@@ -171,6 +172,7 @@ const CreateMeal = (props) => {
 
               <Postinput
                 onchange={cal_Change}
+                type={"text"}
                 title={"칼로리"}
                 value={calorie}
                 placeholder={"칼로리를 입력 해주세요"}

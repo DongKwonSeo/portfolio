@@ -26,29 +26,22 @@
 }
 
 .main_table {
-  width: 48%;
-  border: 1px solid #444444;
+  width: 49%;
+  // border: 1px solid #444444;
   border-collapse: collapse;
+  border: 1px solid #000000 !important;
+  border-radius: 30px;
+  overflow: hidden;
+  text-align: center;
 }
 th,
 td {
-  border: 1px solid #444444;
-  padding: 10px;
-  text-align: center;
+  padding: 15px;
+  background: #ddd;
+  border: none;
+  border-bottom: 2px solid white;
 }
-// modal
 
-.modal {
-  width: 900px;
-  height: 600px;
-  border: 1px solid #000;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background: blanchedalmond;
-  z-index: 9999;
-}
 
 // padding
 

@@ -112,71 +112,73 @@ const Modals = ({ id, type }) => {
   };
 
   return (
-    <div className="modal">
-      <div className="modal__wrap">
-        {type === "workout" ? (
-          <table className="modal__table">
-            {/* workout 테이블 */}
-            <thead>
-              <tr>
-                <th>날짜</th>
-                <th>운동종류</th>
-                <th>운동시간</th>
-                <th>소비칼로리</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{workout.create}</td>
-                <td>{workout.workout_type}</td>
-                <td>{workout.hour}</td>
-                <td>{workout.workout_calorie}Kal</td>
-              </tr>
-            </tbody>
-          </table>
-        ) : (
-          // meals table
-          <table className="modal__table">
-            <thead>
-              <tr>
-                <th>날짜</th>
-                <th>식사시간</th>
-                <th>식사 분류</th>
-                <th>칼로리</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* 날짜	식사시간	아침/점심/저녁	식단 내역	칼로리 */}
-              <tr>
-                <td>{meals.create}</td>
-                <td>{meals.meal_type}</td>
-                <td>{meals.meal_desc}</td>
-                <td>{meals.calorie}Kal</td>
-              </tr>
-            </tbody>
-          </table>
-        )}
+    <div className="modal__box">
+      <div className="modal">
+        <div className="modal__wrap">
+          {type === "workout" ? (
+            <table className="modal__table">
+              {/* workout 테이블 */}
+              <thead>
+                <tr>
+                  <th>날짜</th>
+                  <th>운동종류</th>
+                  <th>운동시간</th>
+                  <th>소비칼로리</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{workout.create}</td>
+                  <td>{workout.workout_type}</td>
+                  <td>{workout.hour}</td>
+                  <td>{workout.workout_calorie}Kal</td>
+                </tr>
+              </tbody>
+            </table>
+          ) : (
+            // meals table
+            <table className="modal__table">
+              <thead>
+                <tr>
+                  <th>날짜</th>
+                  <th>식사시간</th>
+                  <th>식사 분류</th>
+                  <th>칼로리</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* 날짜	식사시간	아침/점심/저녁	식단 내역	칼로리 */}
+                <tr>
+                  <td>{meals.create}</td>
+                  <td>{meals.meal_type}</td>
+                  <td>{meals.meal_desc}</td>
+                  <td>{meals.calorie}Kal</td>
+                </tr>
+              </tbody>
+            </table>
+          )}
 
-        {/* 댓글  */}
-        <form action="#" className="comment" onSubmit={comment_sumit}>
-          <h2 className="comment__title">코멘트 남기기</h2>
-          <input
-            className="comment__input"
-            type="text"
-            placeholder="댓글을 입렵해주세요!"
-            onChange={commet_Change}
-            value={postcomments.comment}
-          />
-          <button className="comment__sumit">등록</button>
-          <div className="comment__list">
-            <h2 className="comment__title">{comments.length}</h2>
-            <ul>
-              {comments.map((comment) => (
-                <li key={comment._id}>{comment.comment}</li>
-              ))}
-            </ul>
-          </div>
-        </form>
+          {/* 댓글  */}
+          <form action="#" className="comment" onSubmit={comment_sumit}>
+            <h2 className="comment__title">코멘트 남기기</h2>
+            <input
+              className="comment__input"
+              type="text"
+              placeholder="댓글을 입렵해주세요!"
+              onChange={commet_Change}
+              value={postcomments.comment}
+            />
+            <button className="comment__sumit">등록</button>
+            <div className="comment__list">
+              <h2 className="comment__title">{comments.length}</h2>
+              <ul>
+                {comments.map((comment) => (
+                  <li key={comment._id}>{comment.comment}</li>
+                ))}
+              </ul>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

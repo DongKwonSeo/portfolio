@@ -1,7 +1,7 @@
 import React from "react";
 import "../../scss/common/input.scss";
 
-const Postinput = ({ title, onchange, placeholder, value }) => {
+const Postinput = ({ title, onchange, placeholder, value, type }) => {
   return (
     <>
       <form className="post">
@@ -11,7 +11,7 @@ const Postinput = ({ title, onchange, placeholder, value }) => {
         </label>
         <input
           className="post__input"
-          type="text"
+          type={type}
           onChange={onchange}
           placeholder={placeholder}
           value={value}

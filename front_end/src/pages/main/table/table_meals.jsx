@@ -23,8 +23,6 @@ const TableMeals = (props) => {
     axios
       .get("http://localhost:3601/api/meals") //
       .then((result) => {
-        console.log(result);
-        console.log({ data: result.data.data });
         let meals = result.data.data;
         for (let i = 0; i < meals.length; i++) {
           const item = meals[i];
@@ -32,10 +30,7 @@ const TableMeals = (props) => {
           console.log(item);
           item.time = Time(item.create);
           item.create = getMD(item.create);
-          // console.log({ item });
-          //날짜
-          // getMD()
-          //칼로리
+
           item.calorie = item.calorie + "kal";
           meals[i] = item;
         }
