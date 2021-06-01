@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "../../components/common/button";
 import Postinput from "../../components/common/post_input";
 import { useDispatch } from "react-redux";
-import { setlogin } from "../../store/user";
+import { login } from "../../store/user";
 import "../../scss/login.scss";
 
 const Login = (props) => {
@@ -18,38 +18,43 @@ const Login = (props) => {
   };
 
   const login_sumit = async (e) => {
-    e.preventDefault();
     let information = {
       user_id,
       password,
     };
-    dispatch(setlogin(information));
+    dispatch(login(information));
 
     //  input reset
     setUser_id("");
     setPassword("");
   };
+  const handleKeyPress = (e) => {
+    console.log(e.key);
+    if (e.key === "Enter") {
+      e.preventDefault();
+      login_sumit();
+    }
+  };
+
   return (
-    <section className="section_padding container">
-      <div className="login">
-        <section>
-          <h1 className="login__title">LOGIN</h1>
-
-          <Postinput
-            type={"id"}
-            value={user_id}
-            onchange={user_id_Onchang}
-            placeholder={"ID"}
-          />
-          <Postinput
-            type={"password"}
-            value={password}
-            onchange={password_Onchang}
-            placeholder={"PASSWORD"}
-          />
-
-          <Button children={"LOGIN"} handleClick={login_sumit} />
-        </section>
+    <section className="section_padding container login">
+      <div>
+        <h1 className="login__title">LOGIN</h1>
+        <Postinput
+          type={"id"}
+          value={user_id}
+          onchange={user_id_Onchang}
+          placeholder={"ID"}
+          onKeyPress={handleKeyPress}
+        />
+        <Postinput
+          type={"password"}
+          value={password}
+          onchange={password_Onchang}
+          placeholder={"PASSWORD"}
+          onKeyPress={handleKeyPress}
+        />
+        <Button children={"LOGIN"} handleClick={login_sumit} />
       </div>
     </section>
   );

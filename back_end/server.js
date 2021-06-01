@@ -18,13 +18,17 @@ const app = express();
 // DB 설정
 connectDB();
 // 크로스 설정
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 // bodyParser
 app.use(bodyParser.json());
 // cookieParser
-app.use(cookieParser())
-
+app.use(cookieParser());
 
 // fileupload
 app.use(fileupload());

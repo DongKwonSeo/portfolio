@@ -26,8 +26,7 @@ const TableMeals = (props) => {
         let meals = result.data.data;
         for (let i = 0; i < meals.length; i++) {
           const item = meals[i];
-          // item.id = i;
-          console.log(item);
+
           item.time = Time(item.create);
           item.create = getMD(item.create);
 

@@ -29,6 +29,9 @@ const Header = (props) => {
             <NavLink to="/login" activeClassName="on">
               <li>로그인</li>
             </NavLink>
+            <NavLink to="/register" activeClassName="on">
+              <li>회원가입</li>
+            </NavLink>
           </ul>
         </div>
       </div>

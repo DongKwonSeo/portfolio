@@ -41,34 +41,36 @@ const Register = (props) => {
   return (
     <>
       <h1>회원가입</h1>
-      <Postinput
-        type={"id"}
-        value={user_id}
-        onchange={user_Onchang}
-        placeholder={"ID"}
-      />
+      <section>
+        <Postinput
+          type={"id"}
+          value={user_id}
+          onchange={user_Onchang}
+          placeholder={"ID"}
+        />
 
-      <Postinput
-        type={"password"}
-        value={password}
-        onchange={password_Onchang}
-        placeholder={"ID"}
-      />
+        <Postinput
+          type={"password"}
+          value={password}
+          onchange={password_Onchang}
+          placeholder={"ID"}
+        />
 
-      <Postinput
-        type={"name"}
-        value={email}
-        onchange={email_Onchang}
-        placeholder={"ID"}
-      />
+        <Postinput
+          type={"name"}
+          value={email}
+          onchange={email_Onchang}
+          placeholder={"ID"}
+        />
 
-      <Postinput
-        type={"email"}
-        value={name}
-        onchange={name_Onchang}
-        placeholder={"ID"}
-      />
-      <Button children={"LOGIN"} handleClick={reguster_sumit} />
+        <Postinput
+          type={"email"}
+          value={name}
+          onchange={name_Onchang}
+          placeholder={"ID"}
+        />
+        <Button children={"LOGIN"} handleClick={reguster_sumit} />
+      </section>
     </>
   );
 };
