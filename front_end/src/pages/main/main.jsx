@@ -2,8 +2,7 @@ import React from "react";
 import List from "./data_list/data_list";
 import Meals from "./table/table_meals";
 import Workout from "./table/table_workout";
-import "../../scss/layout.scss";
-import "../../scss/common/data_list.scss";
+import "../../scss/style.scss";
 
 const Main = () => {
   return (

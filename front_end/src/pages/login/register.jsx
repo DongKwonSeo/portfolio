@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "../../components/common/button";
 import { useDispatch } from "react-redux";
 import Postinput from "../../components/common/post_input";
+import "../../scss/style.scss";
 
 const Register = (props) => {
   const dispatch = useDispatch();

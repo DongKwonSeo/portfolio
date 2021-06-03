@@ -1,10 +1,9 @@
 // import React, { useEffect, useState } from "react";
 import React, { useState } from "react";
 import axios from "axios";
-import "../../scss/layout.scss";
-import "../../scss/create_workOut.scss";
 import Button from "../../components/common/button";
 import Postinput from "../../components/common/post_input";
+import "../../scss/style.scss";
 
 const CreateWorkOut = (props) => {
   const [workout_type, setworkout_type] = useState("");

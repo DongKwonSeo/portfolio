@@ -1,4 +1,5 @@
 import React from "react";
+import "../../../scss/style.scss";
 
 const TableMealsItem = ({ meal, isopen, setisopen, setContentId }) => {
   const toggleModal = () => {

@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Modals from "../../../components/layout/modals/modal";
-
 import TableMealsItem from "./table_meals_item";
+import "../../../scss/style.scss";
 
 const TableMeals = (props) => {
   const [isopen, setisopen] = useState(false);

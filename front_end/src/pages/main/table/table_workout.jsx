@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import WorkoutsItem from "./table_workouts_item";
 import Modals from "../../../components/layout/modals/modal";
-import "../../../scss/layout.scss";
 import axios from "axios";
-
+import "../../../scss/style.scss";
 const Workout = (props) => {
   const [workout, setWorkout] = useState([
     {

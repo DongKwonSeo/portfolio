@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { auth } from "../store/user";
 import { useHistory } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 const authcheck = function (SpecificComponent, option, adminRoute = null) {
   //null    =>  아무나 출입이 가능한 페이지
@@ -15,29 +16,26 @@ const authcheck = function (SpecificComponent, option, adminRoute = null) {
   function AuthenticationCheck(props) {
     const dispatch = useDispatch();
     const history = useHistory();
+    // const [cookies, setCookie, removeCookie] = useCookies(["check"]);
+    // const { cookies } = props;
+    const [cookies] = useCookies(["x_auth"]);
 
     useEffect(() => {
-      dispatch(auth()) //
-        .then((response) => {
-          console.log(response);
-          // 로그인 하지 않은 상태
-          if (!response.payload.isAuth) {
-            if (option) {
-              history.push("/login");
-            }
-          } else {
-            //로그인 한 상태
-            if (adminRoute && !response.payload.isAdmin) {
-              history.push("/");
-            } else {
-              if (option === false) history.push("/");
-            }
-          }
-        });
+      const setLogin = async () => {
+        const iscookies = cookies.x_auth;
+        await dispatch(auth(history, option, iscookies));
+      };
+      setLogin();
+
+      // async function setLogin() {
+      //   await dispatch(auth(history));
+      // }
+      // setLogin();
     }, []);
 
     return <SpecificComponent {...props} />;
   }
+
   return AuthenticationCheck;
 };
 

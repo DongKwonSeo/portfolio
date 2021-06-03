@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../scss/common/data_list.scss";
+import "../../../scss/style.scss";
 const List = (props) => (
   <div className="data_list">
     <h1 className="data_list__name">님의 health Log</h1>

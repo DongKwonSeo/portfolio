@@ -1,5 +1,4 @@
 import React from "react";
-// import ModalWorkout from "../../../modals/workout/modal_workout";
 
 const WorkoutsItem = ({
   work, //

@@ -1,5 +1,5 @@
 import React from "react";
-import "../../scss/home.scss";
+import "../../scss/style.scss";
 // import { useSelector, useDispatch } from "react-redux";
 // import { selectValue, increment, decrement } from "../../redux/testSlice";
 

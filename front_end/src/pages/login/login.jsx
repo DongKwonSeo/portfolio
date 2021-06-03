@@ -3,10 +3,13 @@ import Button from "../../components/common/button";
 import Postinput from "../../components/common/post_input";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/user";
-import "../../scss/login.scss";
+import { useHistory } from "react-router";
+import "../../scss/style.scss";
 
 const Login = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const [user_id, setUser_id] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,7 +25,7 @@ const Login = (props) => {
       user_id,
       password,
     };
-    dispatch(login(information));
+    dispatch(login(history, information));
 
     //  input reset
     setUser_id("");

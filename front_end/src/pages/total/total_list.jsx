@@ -1,5 +1,5 @@
 import React from "react";
-import "../../scss/common/total_list.scss";
+import "../../scss/style.scss";
 const TotalList = ({ total }) => {
   return (
     <div className="total__list">

@@ -1,5 +1,5 @@
 import React from "react";
-import "../../scss/common/input.scss";
+import "../../scss/style.scss";
 
 const Postinput = ({
   title,

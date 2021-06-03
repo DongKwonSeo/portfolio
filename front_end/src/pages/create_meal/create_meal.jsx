@@ -3,8 +3,7 @@ import axios from "axios";
 import Button from "../../components/common/button";
 import Postinput from "../../components/common/post_input";
 import Radio from "../../components/common/radio";
-import "../../scss/layout.scss";
-import "../../scss/create_meals.scss";
+import "../../scss/style.scss";
 
 const CreateMeal = (props) => {
   const [mealDesc, setMealDesc] = useState([]);

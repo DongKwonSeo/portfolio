@@ -1,5 +1,5 @@
 import React from "react";
-import "../../scss/common/button.scss";
+import "../../scss/style.scss";
 const Button = ({ children, handleClick }) => {
   return (
     <button
