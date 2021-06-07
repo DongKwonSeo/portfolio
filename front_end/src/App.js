@@ -43,7 +43,7 @@ export default App;
 // test(true); // 1
 // test(false); // 1, 2
 // 1. test(); // console 1 2
-// 2. console.log(foo); // "foo"
+// 2. console.log(foo()); // "foo"
 
 // type
 // bolean true false

@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Button from "../../components/common/button";
 import Postinput from "../../components/common/post_input";
 import { useDispatch } from "react-redux";
-import { login } from "../../store/user";
+// import { login } from "../../store/user";
 import { useHistory } from "react-router";
+import { login } from "../../modules/actions";
+
 import "../../scss/style.scss";
 
 const Login = (props) => {
@@ -21,11 +23,16 @@ const Login = (props) => {
   };
 
   const login_sumit = async (e) => {
-    let information = {
+    // let information = {
+    //   user_id,
+    //   password,
+    // };
+    let userInfo = {
       user_id,
       password,
     };
-    dispatch(login(history, information));
+    // dispatch(login(history, information));
+    dispatch(login(userInfo));
 
     //  input reset
     setUser_id("");
@@ -40,7 +47,7 @@ const Login = (props) => {
   };
 
   return (
-    <section className="section_padding container login">
+    <section className="login">
       <div>
         <h1 className="login__title">LOGIN</h1>
         <Postinput

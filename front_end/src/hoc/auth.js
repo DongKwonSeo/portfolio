@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { auth } from "../store/user";
 import { useHistory } from "react-router-dom";
-import { useCookies } from "react-cookie";
 
 const authcheck = function (SpecificComponent, option, adminRoute = null) {
   //null    =>  아무나 출입이 가능한 페이지
@@ -14,16 +13,15 @@ const authcheck = function (SpecificComponent, option, adminRoute = null) {
   // adminRoute 특정 사용하 type 을 넣어주기 위해
 
   function AuthenticationCheck(props) {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const history = useHistory();
     // const [cookies, setCookie, removeCookie] = useCookies(["check"]);
     // const { cookies } = props;
-    const [cookies] = useCookies(["x_auth"]);
+    // const [cookies, setCookie, removeCookie] = useCookies(["x_auth"]);
 
     useEffect(() => {
       const setLogin = async () => {
-        const iscookies = cookies.x_auth;
-        await dispatch(auth(history, option, iscookies));
+        // await dispatch(auth(history, option));
       };
       setLogin();
 

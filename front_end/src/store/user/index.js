@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useCookies } from "react-cookie";
 
 // 초기 값 설정
 const initialState = {
@@ -26,29 +25,10 @@ export const setlogin = () => {
 };
 
 // auth action
-export const auth = (history, option, cookies) => async (dispatch) => {
+export const auth = (history, option) => async (dispatch) => {
   // console.log(a, b, state, ctx);
   try {
-    // const response = await axios.get("http://localhost:3601/api/users/auth", {
-    // const data = response.data; > // const { data } = response
-
-    // const { data } = { data: {user: {}, coupon: {}}, statusCode:..., ...};
-    // response.data = .. // data
-    // response.data.user = .. // data.user
-    // response.data.isAuth = .. //data.isAuth
-
-    // const { data: {user, coupon} } = { data: {user: {}, coupon: {}}, statusCode:..., ...};
-    // response.data.user = .. // user
-    // response.data.coupon = .. // coupon
-    //  쿠키값이 없으면 THORW
-    const iscookies = cookies;
-
-    if (!iscookies) {
-      throw new Error("ERROR");
-    }
-
     //
-
     const { data } = await axios.get("http://localhost:3601/api/users/auth", {
       withCredentials: true,
     });
@@ -140,3 +120,22 @@ export default function userReducer(state = initialState, action) {
       return state;
   }
 }
+
+// const response = await axios.get("http://localhost:3601/api/users/auth", {
+// const data = response.data; > // const { data } = response
+
+// const { data } = { data: {user: {}, coupon: {}}, statusCode:..., ...};
+// response.data = .. // data
+// response.data.user = .. // data.user
+// response.data.isAuth = .. //data.isAuth
+
+// const { data: {user, coupon} } = { data: {user: {}, coupon: {}}, statusCode:..., ...};
+// response.data.user = .. // user
+// response.data.coupon = .. // coupon
+//  쿠키값이 없으면 THORW
+// console.log(cookies);
+// const iscookies = cookies;
+
+// if (!iscookies) {
+//   throw new Error("ERROR");
+// }
