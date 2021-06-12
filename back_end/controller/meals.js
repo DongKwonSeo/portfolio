@@ -17,7 +17,7 @@ exports.getmeals = asyncHandler(async (req, res, next) => {
   }
   res.status(200).json({
     success: true,
-    data: meals,
+    infor: meals,
   });
 });
 
@@ -30,7 +30,7 @@ exports.getOneMeals = asyncHandler(async (req, res, next) => {
   }
   res.status(200).json({
     success: true,
-    data: meals,
+    infor: meals,
   });
 });
 
@@ -42,6 +42,7 @@ exports.createMeal = asyncHandler(async (req, res, next) => {
 
   try {
     let user = await User.findOne({ _id: user_id });
+    
     if (!user) {
       return res.status(404).send({
         message: "create new user fail",

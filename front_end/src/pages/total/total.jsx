@@ -7,7 +7,7 @@ import Modals from "../../components/layout/modals/modal";
 import axios from "axios";
 
 const Total = (props) => {
-  const [total_list, settotal_list] = useState([
+  const [totalList, SettotalList] = useState([
     {
       id: "1",
       hour: "3", //
@@ -20,7 +20,6 @@ const Total = (props) => {
       turm: "WEEKLY",
       name: "이번달 운동시간",
     },
-
     {
       id: "3",
       hour: "10", //
@@ -34,22 +33,9 @@ const Total = (props) => {
       name: "이번달 운동시간",
     },
   ]);
-  const [timeLines, settimeLine] = useState([
-    // {
-    //   id: "1",
-    //   icon: <i className="fas fa-dumbbell"></i>,
-    //   type: "WorkOut",
-    //   desc: "조깅",
-    //   cal: "100",
-    //   create: "2020.05.05",
-    // },
-  ]);
-  const [isopen, setisopen] = useState(false);
-  const [modalState, setmodalState] = useState({});
-
-  useEffect(() => {
-    getTotal();
-  }, []);
+  const [timeLines, SettimeLine] = useState([]);
+  const [isopen, Setisopen] = useState(false);
+  const [modalState, SetmodalState] = useState({});
 
   const getMD = (create) => {
     const d = new Date(create);
@@ -61,10 +47,8 @@ const Total = (props) => {
   const getTotal = async () => {
     try {
       let timelineData = [];
-      const response = await axios.get(`http://localhost:3601/api/meals`);
-      let meals = response.data.data;
-      // meals.time = Time(meals.create);
-
+      const response1 = await axios.get(`http://localhost:3601/api/meals`);
+      let meals = response1.data.infor;
       for (let i = 0; i < meals.length; i++) {
         const obj = {
           _id: meals[i]._id,
@@ -75,20 +59,12 @@ const Total = (props) => {
           cal: meals[i].calorie,
           create: (meals[i].create = getMD(meals[i].create)),
         };
-
-        // meals[i].type = "";
-        // meals[i].types = "Meal";
-        // meals[i].desc = meals[i].meal_desc;
-        // meals[i].cal = meals[i].calorie;
-        //크리에이트
         meals[i].create = getMD(meals[i].create);
         timelineData.push(obj);
       }
       // work out api
       const response2 = await axios.get(`http://localhost:3601/api/workout`);
-      let workout = response2.data.data;
-      // meals.time = Time(meals.create);
-      // meals.create = getMD(meals.create);
+      let workout = response2.data.infor;
       for (let i = 0; i < workout.length; i++) {
         const obj = {
           _id: workout[i]._id,
@@ -97,31 +73,29 @@ const Total = (props) => {
           display_type: "WorkOut",
           desc: [workout[i].workout_type],
           cal: workout[i].workout_calorie,
+          hour: workout[i],
           create: (workout[i].create = getMD(workout[i].create)),
           // create:
         };
-
+        // console.log(obj.hour, "시간시간");
         timelineData.push(obj);
       }
-
       //CREATE SORT
-      settimeLine(timelineData);
-      // id: "2",
-      // icon: <+melas.length; className="fas fa-apple-alt"></+melas.length;>,
-      // type: "Meal",
-      // desc: "햄버거",
-      // cal: "100",
-      // create: "2020.05.05",
+      SettimeLine(timelineData);
     } catch (error) {
       console.log(error);
     }
   };
+  // 비동기 !
+  useEffect(() => {
+    getTotal();
+  }, [SettimeLine]);
 
   return (
     <section className="total">
       <div className="total__container">
         <div className="total__wrap">
-          {total_list.map((total) => (
+          {totalList.map((total) => (
             <TotalList total={total} key={total.id} />
           ))}
         </div>
@@ -150,8 +124,8 @@ const Total = (props) => {
                     timeLines={timeLine} //
                     key={timeLine._id}
                     isopen={isopen}
-                    setisopen={setisopen}
-                    setmodalState={setmodalState}
+                    Setisopen={Setisopen}
+                    SetmodalState={SetmodalState}
                   />
                 ))}
               </tbody>

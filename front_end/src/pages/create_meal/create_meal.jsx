@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Button from "../../components/common/button";
 import Postinput from "../../components/common/post_input";
@@ -6,113 +6,72 @@ import Radio from "../../components/common/radio";
 import "../../scss/style.scss";
 
 const CreateMeal = (props) => {
-  const [mealDesc, setMealDesc] = useState([]);
-  const [calorie, setCalorie] = useState("");
-  const [meal_type, setmeal_type] = useState("");
-  const [inputdata, setinputdata] = useState("");
-  const [img, setImage] = useState("../imgs/noimg.png");
-  const [file, setfile] = useState(null);
+  const [mealDesc, SetmealDesc] = useState([]);
+  const [calorie, Setcalorie] = useState("");
+  const [mealType, SetmealType] = useState("");
+  const [img, SetImage] = useState("../imgs/noimg.png");
+  const [files, Setfiles] = useState(null);
   const save = async (e) => {
-    e.preventDefault();
-    const config = { header: { "content-type": "multipart/form-data" } };
-    await axios
-      .post(
+    try {
+      e.preventDefault();
+      const config = { header: { "content-type": "multipart/form-data" } };
+      const infor = {
+        meal_desc: mealDesc,
+        calorie: calorie,
+        meal_type: mealType,
+        user_id: "6043c0fb032f6022cda5c18a",
+        file: files,
+      };
+      const { data } = await axios.post(
         "http://localhost:3601/api/meals",
-        {
-          meal_desc: mealDesc,
-          calorie: calorie,
-          meal_type: meal_type,
-          user_id: "6043c0fb032f6022cda5c18a",
-          file: file,
-        },
+        infor,
         config
-      )
-      .then((response) => {
-        console.log(response.data);
-        // response
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    console.log(save);
-    clearAll();
+      );
+      clearAll();
+    } catch (error) {
+      console.log(error);
+    }
   };
   const clearAll = () => {
-    setCalorie("");
-    setMealDesc("");
-    setmeal_type("");
+    Setcalorie("");
+    SetmealDesc("");
+    SetmealType("");
   };
-  // meal_type onchange taget.value 가지고오기
-  //    "meal_type":"점심",
-  // "calorie":6000,
-  // "meal_desc":["감자","옥수수"],
-  // "user_id": "6043c0fb032f6022cda5c18a"
 
-  // const add = () => {
-  //   setMealDesc(mealDesc.concat(inputdata));
-  // };
-  const mealDesc_Change = (e) => {
-    setMealDesc(e.target.value);
+  const mealDescOnChange = (e) => {
+    SetmealDesc(e.target.value);
   };
   const cal_Change = (e) => {
-    setCalorie(e.target.value);
+    Setcalorie(e.target.value);
   };
 
   const radioChange_1 = (e) => {
-    setmeal_type(e.target.value);
+    SetmealType(e.target.value);
   };
   const radioChange_2 = (e) => {
-    setmeal_type(e.target.value);
+    SetmealType(e.target.value);
   };
   const radioChange_3 = (e) => {
-    setmeal_type(e.target.value);
+    SetmealType(e.target.value);
   };
 
-  const inputdata_change = (e) => {
-    setinputdata(e.target.value);
+  const onfileClick = () => {
+    const imgtag = document.getElementById("test");
+    imgtag.click();
   };
-
-  // const onChangeFileReader = (e) => {
-  //   const formData = new FormData();
-
-  //   // console.log(e.target.files[0]);
-  //   // formData.append(e.target.files[0]);
-  //   const reader = new FileReader();
-
-  //   console.log("event log1", e);
-  //   reader.onload = (e) => {
-  //     // const mealImageElem = document.querySelector(".post__meals__img");
-  //     // console.log(e.currentTarget.reseult);
-  //     // mealImageElem.src = e.target.files[0].currentTarget.reseult;
-  //     // console.log("event log2", e);
-  //   };
-  //   const imageUrl = reader.readAsDataURL(e.target.files[0]);
-  //   console.log(reader, "imageUrl", imageUrl);
-  // };
 
   const onChangeFileReader = (e) => {
     if (!e.target.files[0]) {
       const file = null;
-      setfile(file);
-      setImage("../imgs/noimg.png");
+      Setfiles(file);
+      SetImage("../imgs/noimg.png");
       return;
     }
     const file = e.target.files[0];
-    setfile(file);
+    Setfiles(file);
     const Image = URL.createObjectURL(file);
-    setImage(Image);
+    SetImage(Image);
   };
-  const imgtag = useRef();
-  const onfileClick = () => {
-    imgtag.click();
-  };
-  // const onfileClick = () => {
-  //   const imgtag = document.getElementById("test");
-  //   imgtag.click();
-  // };
-
-  // 리액트 ref 이용해서 객체 선택 !
-  // URL 해야 IMG 입력 값을 넣어줘야 한다
 
   return (
     <section className="section_padding">
@@ -129,7 +88,6 @@ const CreateMeal = (props) => {
             <div className="post__meals__wrap">
               <label htmlFor="test">
                 <input
-                  ref={imgtag}
                   id="test"
                   hidden
                   type="file"
@@ -141,7 +99,7 @@ const CreateMeal = (props) => {
                 title={"음식종류"}
                 type={"text"}
                 value={mealDesc}
-                onchange={mealDesc_Change}
+                onchange={mealDescOnChange}
                 placeholder={"오늘 먹은 음식을 등록해주세요"}
               />
               <div className="post__meals__checkBox">
@@ -149,21 +107,21 @@ const CreateMeal = (props) => {
                 <Radio
                   id="box1"
                   type={"아침"}
-                  value={meal_type}
+                  value={mealType}
                   name={"mealTime"}
                   onchange={radioChange_1}
                 />
                 <Radio
                   id="box2"
                   type={"점심"}
-                  value={meal_type}
+                  value={mealType}
                   name={"mealTime"}
                   onchange={radioChange_2}
                 />
                 <Radio
                   id="box3"
                   type={"저녁"}
-                  value={meal_type}
+                  value={mealType}
                   name={"mealTime"}
                   onchange={radioChange_3}
                 />

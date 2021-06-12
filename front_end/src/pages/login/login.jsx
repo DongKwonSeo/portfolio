@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Button from "../../components/common/button";
 import Postinput from "../../components/common/post_input";
 import { useDispatch } from "react-redux";
-// import { login } from "../../store/user";
 import { useHistory } from "react-router";
 import { login } from "../../modules/actions";
 
@@ -12,34 +11,28 @@ const Login = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [user_id, setUser_id] = useState("");
-  const [password, setPassword] = useState("");
+  const [user_id, Setuser_id] = useState("");
+  const [password, Setpassword] = useState("");
 
   const user_id_Onchang = (e) => {
-    setUser_id(e.target.value);
+    Setuser_id(e.target.value);
   };
   const password_Onchang = (e) => {
-    setPassword(e.target.value);
+    Setpassword(e.target.value);
   };
 
-  const login_sumit = async (e) => {
-    // let information = {
-    //   user_id,
-    //   password,
-    // };
+  const login_sumit = (e) => {
     let userInfo = {
       user_id,
       password,
     };
-    // dispatch(login(history, information));
     dispatch(login(userInfo));
-
-    //  input reset
-    setUser_id("");
-    setPassword("");
+    Setuser_id("");
+    Setpassword("");
+    history.push("/");
   };
+
   const handleKeyPress = (e) => {
-    console.log(e.key);
     if (e.key === "Enter") {
       e.preventDefault();
       login_sumit();

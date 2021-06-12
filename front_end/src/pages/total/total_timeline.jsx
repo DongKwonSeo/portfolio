@@ -1,15 +1,14 @@
 import React from "react";
 import "../../scss/style.scss";
 const TotalTimeline = ({
-  timeLines,
-  setModal,
+  timeLines, //
   isopen,
-  setisopen,
-  setmodalState,
+  Setisopen,
+  SetmodalState,
 }) => {
   const toggleModal = () => {
-    setisopen(!isopen);
-    setmodalState({ type: timeLines.type, _id: timeLines._id });
+    Setisopen(!isopen);
+    SetmodalState({ type: timeLines.type, _id: timeLines._id });
   };
 
   return (

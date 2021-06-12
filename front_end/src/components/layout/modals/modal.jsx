@@ -3,7 +3,7 @@ import "../../../scss/style.scss";
 import axios from "axios";
 // import "../../../../scss/common/modal.scss";
 const Modals = ({ id, type }) => {
-  const [workout, setWorkout] = useState({
+  const [workout, Setworkout] = useState({
     create: "02.12",
     workout_type: "조깅",
     hour: "2",
@@ -11,14 +11,14 @@ const Modals = ({ id, type }) => {
     _id: "1",
   });
 
-  const [meals, setMeals] = useState({
+  const [meals, Setmeals] = useState({
     _id: 1,
     create: "02.12",
     meal_type: "아침",
     meal_desc: ["수박"],
     calorie: 200,
   });
-  const [comments, setcomments] = useState([
+  const [comments, Setcomments] = useState([
     {
       _id: "",
       comment: "계속 운동 해주세요",
@@ -40,13 +40,13 @@ const Modals = ({ id, type }) => {
   // Meals API 가져오기
   const getmeals = async () => {
     try {
-      const response = await axios.get(`http://localhost:3601/api/meals/${id}`);
-      let meals = response.data.data;
+      const { data } = await axios.get(`http://localhost:3601/api/meals/${id}`);
+      let meals = data.infor;
       meals.time = Time(meals.create);
       meals.create = getMD(meals.create);
 
-      setMeals(meals);
-      setcomments(meals.comments);
+      Setmeals(meals);
+      Setcomments(meals.comments);
     } catch (error) {
       console.log(error);
     }
@@ -55,14 +55,18 @@ const Modals = ({ id, type }) => {
   // Workout API 가져오기
   const getWorkout = async () => {
     try {
-      const response = await axios.get(
+      const { data } = await axios.get(
         `http://localhost:3601/api/workout/${id}`
       );
-      const workout = response.data.data;
+      // const response = await axios.get(
+      //   `http://localhost:3601/api/workout/${id}`
+      // );
+      // 날짜 변경
+      const workout = data.infor;
       workout.create = getMD(workout.create);
 
-      setWorkout(workout);
-      setcomments(workout.comments);
+      Setworkout(workout);
+      Setcomments(workout.comments);
     } catch (error) {
       console.log(error);
     }
@@ -108,7 +112,6 @@ const Modals = ({ id, type }) => {
       comment: e.target.value,
       user_id: "60a125dfa801204acd2810d5",
     });
-    console.log(postcomments);
   };
 
   return (
@@ -130,7 +133,7 @@ const Modals = ({ id, type }) => {
                 <tr>
                   <td>{workout.create}</td>
                   <td>{workout.workout_type}</td>
-                  <td>{workout.hour}</td>
+                  <td>{workout.hour}h</td>
                   <td>{workout.workout_calorie}Kal</td>
                 </tr>
               </tbody>

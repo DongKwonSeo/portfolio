@@ -119,7 +119,9 @@ exports.myinfo = (req, res) => {
 
 exports.logout = (req, res) => {
   User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
+    console.log("1234");
+
     if (err) return res.status(404).json({ success: false, err });
-    return res.status(200).send({ success: true });
+    return res.status(200).send({ success: true, user });
   });
 };

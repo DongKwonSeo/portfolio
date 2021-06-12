@@ -20,7 +20,7 @@ exports.getWorkOut = asyncHandler(async (req, res, next) => {
   }
   res.status(200).json({
     success: true,
-    data: workout,
+    infor: workout,
   });
 });
 
@@ -35,7 +35,7 @@ exports.getOneWorkOut = asyncHandler(async (req, res, next) => {
   }
   res.status(200).json({
     success: true,
-    data: workout,
+    infor: workout,
   });
 });
 
@@ -75,7 +75,7 @@ exports.putWorkout = asyncHandler(async (req, res, next) => {
   const { comment, user_id } = req.body;
 
   let workout = await Workout.findById(req.params.id);
-  // =>_id findOne({_id:req.params.id}) 
+  // =>_id findOne({_id:req.params.id})
   const comment1 = Comment({
     comment: comment,
     user: user_id,
