@@ -38,25 +38,18 @@ exports.getOneMeals = asyncHandler(async (req, res, next) => {
 // POST api/meals/
 // POST api/user/:id/meals
 exports.createMeal = asyncHandler(async (req, res, next) => {
-  let { meal_type, calorie, meal_desc, user_id } = req.body;
-
+  let { meal_type, calorie, meal_desc } = req.body;
+  if (!meal_type || !calorie || !meal_desc) {
+    res.status(400).send();
+  }
   try {
-    let user = await User.findOne({ _id: user_id });
-    
-    if (!user) {
-      return res.status(404).send({
-        message: "create new user fail",
-        error: "this user has already joined",
-      });
-    }
     const meals = await Meals.create({
       meal_type,
       calorie,
       meal_desc,
-      user: user_id,
+      user: req.user._id,
     });
-
-    res.send({ message: "create new user success", meals });
+    res.status(200).json({ message: "식당 등록을 성공했습니다", meals });
   } catch (e) {
     console.error(e);
     res.status(500).send();
