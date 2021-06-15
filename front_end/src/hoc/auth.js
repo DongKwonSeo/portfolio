@@ -16,18 +16,17 @@ const authcheck = function (SpecificComponent, option, adminRoute = null) {
     const dispatch = useDispatch();
     const history = useHistory();
     const { isLoggined } = useSelector((state) => state.user);
-    const { isAuth } = useSelector((state) => state.auth);
+    // const { isAuth } = useSelector((state) => state.auth);
 
     useEffect(() => {
       isLoggined && dispatch(authHandler());
-      console.log(isAuth);
       // 로그인 하지 않은 상태
       // 로그인 하지 앉은 사용자가 로그인한 유저만 접속가능한 페이지에
       // 접근하면 로그인 페이지로 이동시켜라
-      if (!isAuth) {
+      if (!isLoggined) {
         if (option) {
           history.push("/login");
-          setTimeout(() => alert("로그인이 필요합니다!!"), 500);
+          // setTimeout(() => alert("로그인이 필요합니다!!"), 500);
         }
       } else {
         //로그인 한 상태

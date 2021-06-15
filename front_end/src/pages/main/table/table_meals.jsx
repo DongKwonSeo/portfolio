@@ -23,7 +23,7 @@ const TableMeals = (props) => {
     axios
       .get("http://localhost:3601/api/meals") //
       .then((result) => {
-        let meals = result.data.data;
+        let meals = result.data.infor;
         for (let i = 0; i < meals.length; i++) {
           const item = meals[i];
 

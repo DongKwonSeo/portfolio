@@ -8,6 +8,7 @@ const TotalTimeline = ({
 }) => {
   const toggleModal = () => {
     Setisopen(!isopen);
+    console.log(timeLines.type);
     SetmodalState({ type: timeLines.type, _id: timeLines._id });
   };
 
@@ -15,7 +16,7 @@ const TotalTimeline = ({
     <tr onClick={toggleModal}>
       <td>{timeLines.icon}</td>
       <td>{timeLines.display_type}</td>
-      <td>{timeLines.desc.map((item) => item)}</td>
+      <td>{timeLines.desc}</td>
       <td>{timeLines.cal}Kal</td>
       <td>{timeLines.create}</td>
     </tr>

@@ -19,22 +19,22 @@ const Workout = (props) => {
   });
 
   useEffect(() => {
-    axios.get("http://localhost:3601/api/workout").then((result) => {
-      // console.log({ result });
-      // console.log({ data: result.data.data });
-      const workout = result.data.data;
+    axios
+      .get("http://localhost:3601/api/workout") //
+      .then((result) => {
+        // console.log({ result });
+        // console.log({ data: result.data.data });
+        const workout = result.data.infor;
+        for (let i = 0; i < workout.length; i++) {
+          const item = workout[i];
+          // item.id = i;
+          console.log(item);
+          item.create = getMD(item.create);
+          item.workout_calorie = item.workout_calorie + "kal";
+        }
 
-      console.log("workout.length", workout.length);
-      for (let i = 0; i < workout.length; i++) {
-        const item = workout[i];
-        // item.id = i;
-        console.log(item);
-        item.create = getMD(item.create);
-        item.workout_calorie = item.workout_calorie + "kal";
-      }
-
-      setWorkout(workout);
-    });
+        setWorkout(workout);
+      });
   }, []);
 
   function getMD(create) {

@@ -1,21 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, logout } from "../actions";
-
-// 초기 값 설정
+import { login, logout, authHandler } from "../actions";
+import cookies from "js-cookie";
+// authHandler
 const initialState = {
-  isLoggined: false,
+  isLoggined: cookies.get("x_auth") !== undefined,
+  isAuth: cookies.get("x_auth") !== undefined,
   userData: { name: "", email: "", user_id: "" },
 };
+
+// || cookies.get.x_auth !=null,
 
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    
-  },
+  reducers: {},
   extraReducers: (builder) =>
     builder
       .addCase(login.fulfilled, (state, actions) => {
+        console.log(actions.payload.user);
         const { name, email, user_id } = actions.payload.user;
         state.userData = { name, email, user_id };
         state.isLoggined = true;
@@ -25,10 +27,16 @@ const userSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state, actions) => {
         state.isLoggined = false;
-        state.userData = {};
       })
       .addCase(logout.rejected, (state, actions) => {
         state.isLoggined = true;
+      })
+
+      .addCase(authHandler.fulfilled, (state, actions) => {
+        state.isAuth = true;
+      })
+      .addCase(authHandler.rejected, (state, actions) => {
+        state.isAuth = false;
       }),
 });
 

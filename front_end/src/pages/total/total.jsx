@@ -1,95 +1,60 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import TotalList from "./total_list";
 import "../../scss/total.scss";
+import { getTotal } from "../../modules/actions";
 import TotalTimeline from "./total_timeline";
 import Modals from "../../components/layout/modals/modal";
-import axios from "axios";
+const calculateTimeline = (timeline) => {
+  // for (let i = 0; timeline.length; i++) {}
+};
 
 const Total = (props) => {
+  const dispatch = useDispatch();
+  const { timeline, workouts, meales } = useSelector(
+    (state) => state.timeInfor
+  );
+
   const [totalList, SettotalList] = useState([
     {
       id: "1",
       hour: "3", //
       turm: "DAILY",
-      name: "이번달 운동시간",
+      name: "오늘 운동시간",
     },
     {
       id: "2",
       hour: "10", //
       turm: "WEEKLY",
-      name: "이번달 운동시간",
+      name: "이번주 총운동시간",
     },
     {
       id: "3",
       hour: "10", //
       turm: "MONTHLY",
-      name: "이번달 운동시간",
+      name: "이번달 총 운동시간",
     },
     {
       id: "4",
       hour: "50", //
       turm: "TOTAL",
-      name: "이번달 운동시간",
+      name: "총 운동시간",
     },
   ]);
-  const [timeLines, SettimeLine] = useState([]);
   const [isopen, Setisopen] = useState(false);
   const [modalState, SetmodalState] = useState({});
 
-  const getMD = (create) => {
-    const d = new Date(create);
-    const md = d.getFullYear() + "." + (d.getMonth() + 1) + "." + d.getDate(); // 데이터 객체 에서 월 , 일 만 가지고 와서 문자열로 만들어 준다
-    return md;
-  };
+  // Time line
+  //workOut 만 순회를 해서 계산한다
+  // 오늘인지 내일인지
+  //
 
-  // 두가지 데이터를  한 곳으로 불러 오는 방법
-  const getTotal = async () => {
-    try {
-      let timelineData = [];
-      const response1 = await axios.get(`http://localhost:3601/api/meals`);
-      let meals = response1.data.infor;
-      for (let i = 0; i < meals.length; i++) {
-        const obj = {
-          _id: meals[i]._id,
-          icon: <i className="fas fa-apple-alt"></i>,
-          type: "meals",
-          display_type: "Meal",
-          desc: meals[i].meal_desc,
-          cal: meals[i].calorie,
-          create: (meals[i].create = getMD(meals[i].create)),
-        };
-        meals[i].create = getMD(meals[i].create);
-        timelineData.push(obj);
-      }
-      // work out api
-      const response2 = await axios.get(`http://localhost:3601/api/workout`);
-      let workout = response2.data.infor;
-      for (let i = 0; i < workout.length; i++) {
-        const obj = {
-          _id: workout[i]._id,
-          icon: <i className="fas fa-dumbbell"></i>,
-          type: "workout",
-          display_type: "WorkOut",
-          desc: [workout[i].workout_type],
-          cal: workout[i].workout_calorie,
-          hour: workout[i],
-          create: (workout[i].create = getMD(workout[i].create)),
-          // create:
-        };
-        // console.log(obj.hour, "시간시간");
-        timelineData.push(obj);
-      }
-      //CREATE SORT
-      SettimeLine(timelineData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   // 비동기 !
   useEffect(() => {
-    getTotal();
-  }, [SettimeLine]);
+    !timeline.length && dispatch(getTotal());
+    // calculateTimeline(timeline);
+  }, []);
 
   return (
     <section className="total">
@@ -119,10 +84,10 @@ const Total = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {timeLines.map((timeLine) => (
+                {timeline.map((item) => (
                   <TotalTimeline
-                    timeLines={timeLine} //
-                    key={timeLine._id}
+                    timeLines={item} //
+                    key={item._id}
                     isopen={isopen}
                     Setisopen={Setisopen}
                     SetmodalState={SetmodalState}

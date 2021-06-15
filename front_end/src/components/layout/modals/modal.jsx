@@ -4,19 +4,19 @@ import axios from "axios";
 // import "../../../../scss/common/modal.scss";
 const Modals = ({ id, type }) => {
   const [workout, Setworkout] = useState({
-    create: "02.12",
-    workout_type: "조깅",
-    hour: "2",
-    workout_calorie: "120kcal",
-    _id: "1",
+    // create: "02.12",
+    // workout_type: "조깅",
+    // hour: "2",
+    // workout_calorie: "120kcal",
+    // _id: "1",
   });
 
   const [meals, Setmeals] = useState({
-    _id: 1,
-    create: "02.12",
-    meal_type: "아침",
-    meal_desc: ["수박"],
-    calorie: 200,
+    // _id: 1,
+    // create: "02.12",
+    // meal_type: "아침",
+    // meal_desc: ["수박"],
+    // calorie: 200,
   });
   const [comments, Setcomments] = useState([
     {
@@ -32,10 +32,6 @@ const Modals = ({ id, type }) => {
     comment: "",
     user_id: "",
   });
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   // Meals API 가져오기
   const getmeals = async () => {
@@ -58,9 +54,6 @@ const Modals = ({ id, type }) => {
       const { data } = await axios.get(
         `http://localhost:3601/api/workout/${id}`
       );
-      // const response = await axios.get(
-      //   `http://localhost:3601/api/workout/${id}`
-      // );
       // 날짜 변경
       const workout = data.infor;
       workout.create = getMD(workout.create);
@@ -76,10 +69,14 @@ const Modals = ({ id, type }) => {
   const getData = () => {
     if (type === "meals") {
       getmeals();
-    } else if (type === "workout") {
+    } else if (type === "workouts") {
       getWorkout();
     }
   };
+
+  useEffect(() => {
+    getData();
+  }, [setpostcomments]);
 
   // 날짜 만들기
   function getMD(create) {
@@ -118,7 +115,7 @@ const Modals = ({ id, type }) => {
     <div className="modal__box">
       <div className="modal">
         <div className="modal__wrap">
-          {type === "workout" ? (
+          {type === "workouts" ? (
             <table className="modal__table">
               {/* workout 테이블 */}
               <thead>
@@ -162,7 +159,7 @@ const Modals = ({ id, type }) => {
           )}
 
           {/* 댓글  */}
-          <form action="#" className="comment" onSubmit={comment_sumit}>
+          <form className="comment" onSubmit={comment_sumit}>
             <h2 className="comment__title">코멘트 남기기</h2>
             <input
               className="comment__input"

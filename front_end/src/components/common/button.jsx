@@ -1,11 +1,11 @@
 import React from "react";
 import "../../scss/style.scss";
-const Button = ({ children, handleClick }) => {
+const Button = ({ children, onClick }) => {
   return (
     <button
-      type="button"
+      type="submit"
       className="btn" //
-      onClick={handleClick}
+      onClick={onClick}
     >
       {children}
     </button>

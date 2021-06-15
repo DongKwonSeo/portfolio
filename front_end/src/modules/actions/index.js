@@ -9,7 +9,11 @@ export const login = createAsyncThunk(
       userInfo,
       { withCredentials: true }
     );
-    alert(`${data.user.name}님이 로그인 하였습니다.`);
+    if (data.loginSuccess) {
+      alert(`${data.user.name}님이 로그인 하였습니다.`);
+    } else {
+      alert(`${data.user.name}님이 로그인 실패 하였습니다.`);
+    }
     return data;
   }
 );
@@ -51,9 +55,10 @@ export const getTotal = createAsyncThunk(
       return md;
     };
 
-    const response1 = await axios.get("http://localhost:3601/api/meals");
-    let meals = response1.data.infor;
-    let timelineData = [];
+    const {
+      data: { infor: meals },
+    } = await axios.get("http://localhost:3601/api/meals");
+    let mealData = [];
     for (let i = 0; i < meals.length; i++) {
       const obj = {
         _id: meals[i]._id,
@@ -65,25 +70,30 @@ export const getTotal = createAsyncThunk(
         create: (meals[i].create = getMD(meals[i].create)),
       };
       meals[i].create = getMD(meals[i].create);
-      timelineData.push(obj);
+      mealData.push(obj);
     }
+
     // work out api
-    const response2 = await axios.get("http://localhost:3601/api/workout");
-    let workout = response2.data.infor;
-    for (let i = 0; i < workout.length; i++) {
+    const {
+      data: { infor: workouts },
+    } = await axios.get("http://localhost:3601/api/workout");
+    let workoutData = [];
+    console.log(workoutData, "워크아웃데이터");
+    for (let i = 0; i < workouts.length; i++) {
+      workouts[i].createdAt = workouts[i].create;
       const obj = {
-        _id: workout[i]._id,
+        _id: workouts[i]._id,
         icon: <i className="fas fa-dumbbell"></i>,
-        type: "workout",
-        display_type: "WorkOut",
-        desc: [workout[i].workout_type],
-        cal: workout[i].workout_calorie,
-        hour: workout[i],
-        create: (workout[i].create = getMD(workout[i].create)),
-        // create:
+        type: "workouts",
+        display_type: "workouts",
+        desc: workouts[i].workout_type,
+        cal: workouts[i].workout_calorie,
+        hour: workouts[i],
+        create: (workouts[i].create = getMD(workouts[i].create)),
       };
-      // console.log(obj.hour, "시간시간");
-      timelineData.push(obj);
+      workoutData.push(obj);
     }
+
+    return { workoutData, mealData };
   }
 );

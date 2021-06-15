@@ -1,30 +1,32 @@
 import React from "react";
 import "../../scss/style.scss";
-
+// import Useform from "./useform";
 const Postinput = ({
   title,
-  onchange,
-  placeholder,
   value,
+  placeholder,
   type,
+  onChange,
   onKeyPress,
+  name,
 }) => {
   return (
     <>
-      <form className="post">
+      <div className="post">
         <h2 className="post__title">{title}</h2>
         <label htmlFor="post" className="hidden">
           post
         </label>
         <input
           className="post__input"
+          name={name}
           type={type}
-          onChange={onchange}
-          placeholder={placeholder}
+          onChange={onChange}
           value={value}
+          placeholder={placeholder}
           onKeyPress={onKeyPress}
         />
-      </form>
+      </div>
     </>
   );
 };
