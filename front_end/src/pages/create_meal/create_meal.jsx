@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Button from "../../components/common/button";
 import Postinput from "../../components/common/post_input";
@@ -8,10 +8,7 @@ import { useHistory } from "react-router-dom";
 import "../../scss/style.scss";
 
 const CreateMeal = (props) => {
-  const { form, handleChange, handleSubmit, error } = Useform();
-  const [mealDesc, SetmealDesc] = useState([]);
-  const [calorie, Setcalorie] = useState("");
-  const [mealType, SetmealType] = useState("");
+  const { form, handleChange } = Useform();
   const [img, SetImage] = useState("../imgs/noimg.png");
   const [files, Setfiles] = useState(null);
   const history = useHistory();
@@ -19,12 +16,16 @@ const CreateMeal = (props) => {
   const save = async (e) => {
     try {
       e.preventDefault();
-      const config = { header: { "content-type": "multipart/form-data" } };
+      const config = {
+        header: {
+          "content-type": "multipart/form-data",
+        },
+        withCredentials: true,
+      };
       const infor = {
         meal_desc: form.mealDesc,
         calorie: form.calorie,
         meal_type: form.mealType,
-        user_id: "6043c0fb032f6022cda5c18a",
         // file: files,
       };
       const { data } = await axios.post(
@@ -32,8 +33,6 @@ const CreateMeal = (props) => {
         infor,
         config
       );
-      console.log(infor, "정보!!!");
-      // clearAll()
       history.push("/total");
       alert("성공했습니다");
     } catch (error) {

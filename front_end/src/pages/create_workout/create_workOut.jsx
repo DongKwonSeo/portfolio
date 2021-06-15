@@ -2,14 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import Button from "../../components/common/button";
 import Postinput from "../../components/common/post_input";
-
 import "../../scss/style.scss";
 import Useform from "../../components/common/useform";
 
 const CreateWorkOut = (props) => {
-  const [workoutType, SetworkoutType] = useState("");
-  const [hour, Sethour] = useState("");
-  const [workoutCalorie, SetworkoutCalorie] = useState("");
   const { form, handleChange, handleSubmit, error } = Useform();
 
   const save = async (e) => {
@@ -21,20 +17,14 @@ const CreateWorkOut = (props) => {
         workout_calorie: form.workoutCalorie,
         user_id: "6043c0fb032f6022cda5c18a",
       };
-      handleSubmit(e);
-      // console.log(handleSubmit);
-      await axios.post("http://localhost:3601/api/workout", infor);
+      // handleSubmit(e);
+      await axios.post("http://localhost:3601/api/workout", infor, {
+        withCredentials: true,
+      });
+      console.log(infor);
     } catch (error) {
       console.log(error);
     }
-    // form reset!
-    clearAll();
-  };
-
-  const clearAll = () => {
-    Sethour("");
-    SetworkoutType("");
-    SetworkoutCalorie("");
   };
 
   return (

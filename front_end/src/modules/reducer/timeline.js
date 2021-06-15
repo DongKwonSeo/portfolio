@@ -18,8 +18,8 @@ const getTotalSlice = createSlice({
         // action : async api data (비동기 api를 처리한다.)
         // addCase : update state to payload data (상태를 변경한다.)
         const { mealData, workoutData } = actions.payload;
-        state.workouts = [workoutData];
-        state.meales = [mealData];
+        state.workouts = workoutData;
+        state.meales = mealData;
         state.timeline = [...workoutData, ...mealData];
       })
       .addCase(getTotal.rejected, (state, actions) => {}),

@@ -22,7 +22,7 @@ const Postinput = ({
           name={name}
           type={type}
           onChange={onChange}
-          value={value}
+          defaultValue={value}
           placeholder={placeholder}
           onKeyPress={onKeyPress}
         />

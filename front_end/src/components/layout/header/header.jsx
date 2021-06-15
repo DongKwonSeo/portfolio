@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink, useHistory } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import { logout } from "../../../modules/actions";
@@ -52,13 +52,6 @@ const Header = (props) => {
                 <li>로그인</li>
               </NavLink>
             )}
-
-            {/* <li>
-              <button onClick={logoutHandler}>로그아웃</button>
-            </li> */}
-            {/* <li>
-              <button onClick={logoutHandler}>로그아웃</button>
-            </li> */}
           </ul>
         </div>
       </div>

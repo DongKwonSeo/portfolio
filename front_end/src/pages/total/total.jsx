@@ -6,9 +6,9 @@ import "../../scss/total.scss";
 import { getTotal } from "../../modules/actions";
 import TotalTimeline from "./total_timeline";
 import Modals from "../../components/layout/modals/modal";
-const calculateTimeline = (timeline) => {
-  // for (let i = 0; timeline.length; i++) {}
-};
+// const calculateTimeline = (timeline) => {
+//   // for (let i = 0; timeline.length; i++) {}
+// };
 
 const Total = (props) => {
   const dispatch = useDispatch();

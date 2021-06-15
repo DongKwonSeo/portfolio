@@ -62,7 +62,6 @@ export const getTotal = createAsyncThunk(
     for (let i = 0; i < meals.length; i++) {
       const obj = {
         _id: meals[i]._id,
-        icon: <i className="fas fa-apple-alt"></i>,
         type: "meals",
         display_type: "Meal",
         desc: meals[i].meal_desc,
@@ -78,12 +77,10 @@ export const getTotal = createAsyncThunk(
       data: { infor: workouts },
     } = await axios.get("http://localhost:3601/api/workout");
     let workoutData = [];
-    console.log(workoutData, "워크아웃데이터");
     for (let i = 0; i < workouts.length; i++) {
       workouts[i].createdAt = workouts[i].create;
       const obj = {
         _id: workouts[i]._id,
-        icon: <i className="fas fa-dumbbell"></i>,
         type: "workouts",
         display_type: "workouts",
         desc: workouts[i].workout_type,

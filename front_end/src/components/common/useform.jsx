@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import formValidater from "../../components/common/form_validater";
+import { useState } from "react";
+// import formValidater from "../../components/common/form_validater";
 
 const Useform = () => {
   const [form, SetForm] = useState({
