@@ -26,7 +26,7 @@ exports.getusers = asyncHandler(async (req, res, next) => {
 exports.createUser = asyncHandler(async (req, res, next) => {
   const { user_id, email, name, password } = req.body;
   if (!user_id || !email) return res.status(404).send();
-
+  
   try {
     let user = await User.findOne({ user_id });
     if (user) {
@@ -90,10 +90,12 @@ exports.login = asyncHandler((req, res, next) => {
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
         // 토큰 저장 위치 (cookies)
-        return res
-          .status(200)
-          .cookie("x_auth", user.token)
-          .json({ loginSuccess: true, userId: user._id, user: user });
+        return res.status(200).cookie("x_auth", user.token).json({
+          loginSuccess: true,
+          statusCode: 200,
+          userId: user._id,
+          user: user,
+        });
       });
     });
   });

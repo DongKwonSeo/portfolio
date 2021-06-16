@@ -6,11 +6,12 @@ import { login } from "../../modules/actions";
 import "../../scss/style.scss";
 import Useform from "../../components/common/useform";
 
-const Login = () => {
+const Login = (e) => {
   const dispatch = useDispatch();
   const { form, handleChange, handleSubmit, error } = Useform();
 
   const login_sumit = (e) => {
+    e.preventDefault();
     let userInfo = {
       user_id: form.user_id,
       password: form.password,

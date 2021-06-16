@@ -6,11 +6,12 @@ const {
   putWorkout,
   getOneWorkOut,
 } = require("../controller/workout");
+const { auth } = require("../middleware/auth");
 const router = express.Router();
 
-router.get("/", getWorkOut);
+router.get("/", auth, getWorkOut);
 router.route("/:id").get(getOneWorkOut);
-router.post("/", createWorkout);
+router.post("/", auth, createWorkout);
 router.put("/:id", putWorkout);
 
 module.exports = router;

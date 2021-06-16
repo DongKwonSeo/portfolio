@@ -4,26 +4,28 @@ import Button from "../../components/common/button";
 import Postinput from "../../components/common/post_input";
 import "../../scss/style.scss";
 import Useform from "../../components/common/useform";
+import { useHistory } from "react-router-dom";
 
 const CreateWorkOut = (props) => {
   const { form, handleChange, handleSubmit, error } = Useform();
+  const history = useHistory();
 
   const save = async (e) => {
     e.preventDefault();
     try {
+      const config = { withCredentials: true };
       const infor = {
         workout_type: form.workoutType,
         hour: form.hour,
         workout_calorie: form.workoutCalorie,
-        user_id: "6043c0fb032f6022cda5c18a",
       };
       // handleSubmit(e);
-      await axios.post("http://localhost:3601/api/workout", infor, {
-        withCredentials: true,
-      });
-      console.log(infor);
+      await axios.post("http://localhost:3601/api/workout", infor, config);
+      history.push("/total");
+      alert("성공했습니다");
     } catch (error) {
       console.log(error);
+      alert("실패하였습니다");
     }
   };
 

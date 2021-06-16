@@ -11,11 +11,11 @@ const {
 const { auth } = require("../middleware/auth");
 const router = express.Router();
 
-router.get("/", getmeals);
+router.get("/", auth, getmeals);
 router.get("/cal", getCalorie);
 router.route("/:id").get(getOneMeals);
 router.post("/", auth, createMeal);
-router.put("/:id", putMeal);
+router.put("/:id", auth, putMeal);
 
 module.exports = router;
 

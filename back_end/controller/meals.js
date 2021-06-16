@@ -11,7 +11,7 @@ const meals = require("../models/meals");
 // 전체 식단 리스트 조회
 // GET api/meals/
 exports.getmeals = asyncHandler(async (req, res, next) => {
-  const meals = await Meals.find();
+  const meals = await Meals.find({ user: req.user._id });
   if (!meals) {
     next(new ErrorResponse("Meals data not found", 404));
   }
@@ -65,7 +65,7 @@ exports.putMeal = asyncHandler(async (req, res, next) => {
 
   let comment1 = new Comment({
     comment: comment,
-    user: user_id,
+    user: req.user._id,
     content: meal._id,
     onModel: "Meals",
   });
@@ -100,10 +100,3 @@ exports.getCalorie = asyncHandler(async (req, res, next) => {
     res.status(500).send();
   }
 });
-
-// {
-//   "meal_desc":["사과","수박"],
-//   "calorie":"7000",
-//   "user_id": "6043c0fb032f6022cda5c18a",
-//   "meal_type":"점심"
-// }

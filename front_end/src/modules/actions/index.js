@@ -9,7 +9,8 @@ export const login = createAsyncThunk(
       userInfo,
       { withCredentials: true }
     );
-    if (data.loginSuccess) {
+    console.log(data);
+    if (data.statusCode === 200) {
       alert(`${data.user.name}님이 로그인 하였습니다.`);
     } else {
       alert(`${data.user.name}님이 로그인 실패 하였습니다.`);
@@ -57,7 +58,9 @@ export const getTotal = createAsyncThunk(
 
     const {
       data: { infor: meals },
-    } = await axios.get("http://localhost:3601/api/meals");
+    } = await axios.get("http://localhost:3601/api/meals", {
+      withCredentials: true,
+    });
     let mealData = [];
     for (let i = 0; i < meals.length; i++) {
       const obj = {
@@ -75,7 +78,9 @@ export const getTotal = createAsyncThunk(
     // work out api
     const {
       data: { infor: workouts },
-    } = await axios.get("http://localhost:3601/api/workout");
+    } = await axios.get("http://localhost:3601/api/workout", {
+      withCredentials: true,
+    });
     let workoutData = [];
     for (let i = 0; i < workouts.length; i++) {
       workouts[i].createdAt = workouts[i].create;

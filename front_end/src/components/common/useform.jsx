@@ -1,8 +1,14 @@
 import { useState } from "react";
-// import formValidater from "../../components/common/form_validater";
+import formValidater from "../../components/common/form_validater";
 
 const Useform = () => {
   const [form, SetForm] = useState({
+    // register
+    email: "",
+    name: "",
+    id: "",
+    passWord: "",
+    // login
     user_id: "",
     password: "",
     username: "",
@@ -18,10 +24,7 @@ const Useform = () => {
     hour: "",
     workoutCalorie: "",
   });
-  const [error, SetError] = useState({
-    user_id: 0,
-    password: "",
-  });
+  const [error, SetError] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,17 +35,10 @@ const Useform = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    // Seterror(formValidater(form));
-    SetError({
-      ...error,
-      user_id: 3,
-    });
-
-    if (error.user_id || error.password) return;
+    SetError(formValidater(form));
   };
 
-  return { handleChange, form, handleSubmit, error, SetError };
+  return { handleChange, form, handleSubmit, error };
 };
 
 export default Useform;

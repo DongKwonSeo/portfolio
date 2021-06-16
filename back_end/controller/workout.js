@@ -14,7 +14,7 @@ const meals = require("../models/meals");
 
 // GET api/workouts-
 exports.getWorkOut = asyncHandler(async (req, res, next) => {
-  const workout = await Workout.find();
+  const workout = await Workout.find({ user: req.user._id });
   if (!workout.length) {
     next(new ErrorResponse("Workout data not found", 404));
   }
@@ -44,24 +44,19 @@ exports.getOneWorkOut = asyncHandler(async (req, res, next) => {
 // //  POST api/workouts`
 
 exports.createWorkout = asyncHandler(async (req, res, next) => {
-  const { workout_type, hour, workout_calorie, user_id } = req.body;
-  console.log(user_id);
+  const { workout_type, hour, workout_calorie } = req.body;
+  if (!workout_type || !hour || !workout_calorie) {
+    res.status(400).send();
+  }
   try {
-    let user = await User.findById(user_id);
-    if (!user) {
-      return res.status(404).send({
-        message: "create new user fail",
-        error: "this user has already joined",
-      });
-    }
     const workout = await Workout.create({
       workout_type,
       hour,
       workout_calorie,
-      user: user_id,
+      user: req.user._id,
     });
 
-    res.send({ message: "create new workout success", workout });
+    res.send({ message: "운동 등록 완료 했습니다", workout });
   } catch (e) {
     console.error(e);
     res.status(500).send();

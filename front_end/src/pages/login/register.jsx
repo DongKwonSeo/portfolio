@@ -1,49 +1,47 @@
+import React from "react";
 import axios from "axios";
-import React, { useState } from "react";
 import { useHistory } from "react-router";
 import Button from "../../components/common/button";
 import Postinput from "../../components/common/post_input";
+import Useform from "../../components/common/useform";
+import formValidater from "../../components/common/form_validater";
 import "../../scss/style.scss";
 
 const Register = (props) => {
   const history = useHistory();
-  const [user_id, setuser_id] = useState("");
-  const [password, setpassword] = useState("");
-  const [email, setemail] = useState("");
-  const [name, setname] = useState("");
-  const userOnchang = (e) => {
-    setuser_id(e.target.value);
-  };
-  const passWordOnchang = (e) => {
-    setpassword(e.target.value);
-  };
-  const emailOnchang = (e) => {
-    setemail(e.target.value);
-  };
-  const name_Onchang = (e) => {
-    setname(e.target.value);
-  };
-  const inputReset = () => {
-    setuser_id("");
-    setpassword("");
-    setemail("");
-    setname("");
-  };
+  const { form, handleChange, handleSubmit, error } = Useform(formValidater);
 
   const reguster_sumit = async (e) => {
     e.preventDefault();
-
     try {
-      const registerInfo = {
-        user_id,
-        password,
-        email,
-        name,
+      const config = {
+        withCredentials: true,
       };
-      await axios.post("http://localhost:3601/api/users", registerInfo);
-      alert("회원 가입을 성공 하였습니다 ");
-      inputReset();
-      history.push("/");
+      const registerInfo = {
+        user_id: form.id,
+        password: form.passWord,
+        email: form.email,
+        name: form.name,
+      };
+      handleSubmit(e);
+      // console.log("api통과 !!!!!");
+      // await axios.post("http://localhost:3601/api/users", registerInfo, config);
+      // alert("회원 가입을 성공 하였습니다 다시 로그인 해주세요! ");
+      // // inputReset();
+      // history.push("/login");
+
+      if (error.id !== "") {
+        await axios.post(
+          "http://localhost:3601/api/users",
+          registerInfo,
+          config
+        );
+        alert("회원 가입을 성공 하였습니다 다시 로그인 해주세요! ");
+        // inputReset();
+        history.push("/login");
+      } else {
+        throw error;
+      }
     } catch (err) {
       console.log(err);
       alert("회원 가입을 실패하였습니다 ");
@@ -52,36 +50,46 @@ const Register = (props) => {
 
   return (
     <div className="regiter">
-      <section className="regiter__form">
+      <form onSubmit={reguster_sumit} className="regiter__form">
         <h1>회원가입</h1>
         <div className="div">
           <Postinput
             type={"id"}
-            value={user_id}
-            onchange={userOnchang}
+            name={"id"}
+            value={form.id}
+            onChange={handleChange}
             placeholder={"ID"}
           />
+          {error.id !== "" && <p>{error.id}</p>}
+
+          {console.log(error.id)}
+
           <Postinput
             type={"password"}
-            value={password}
-            onchange={passWordOnchang}
+            name={"passWord"}
+            value={form.passWord}
+            onChange={handleChange}
             placeholder={"password"}
           />
-          <Postinput
-            type={"name"}
-            value={email}
-            onchange={emailOnchang}
-            placeholder={"email"}
-          />
+          {error.id !== "" && <p>{error.id}</p>}
           <Postinput
             type={"email"}
-            value={name}
-            onchange={name_Onchang}
+            name={"email"}
+            value={form.email}
+            onChange={handleChange}
+            placeholder={"email"}
+          />
+          {error.id !== "" && <p>{error.id}</p>}
+          <Postinput
+            type={"name"}
+            name={"name"}
+            value={form.name}
+            onChange={handleChange}
             placeholder={"name"}
           />
-          <Button children={"회원가입"} handleClick={reguster_sumit} />
+          <Button children={"회원가입"} />
         </div>
-      </section>
+      </form>
     </div>
   );
 };
