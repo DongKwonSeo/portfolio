@@ -11,8 +11,9 @@ const Register = (props) => {
   const history = useHistory();
   const { form, handleChange, handleSubmit, error } = Useform(formValidater);
 
-  const reguster_sumit = async (e) => {
+  const onRegusterSumit = async (e) => {
     e.preventDefault();
+
     try {
       const config = {
         withCredentials: true,
@@ -23,25 +24,14 @@ const Register = (props) => {
         email: form.email,
         name: form.name,
       };
-      handleSubmit(e);
-      // console.log("api통과 !!!!!");
-      // await axios.post("http://localhost:3601/api/users", registerInfo, config);
-      // alert("회원 가입을 성공 하였습니다 다시 로그인 해주세요! ");
-      // // inputReset();
-      // history.push("/login");
-
-      if (error.id !== "") {
-        await axios.post(
-          "http://localhost:3601/api/users",
-          registerInfo,
-          config
-        );
-        alert("회원 가입을 성공 하였습니다 다시 로그인 해주세요! ");
-        // inputReset();
-        history.push("/login");
-      } else {
-        throw error;
+      if (handleSubmit(e, "register") === false) {
+        console.log("false", "확인!!");
+        return;
       }
+      await axios.post("http://localhost:3601/api/users", registerInfo, config);
+      alert("회원 가입을 성공 하였습니다 다시 로그인 해주세요! ");
+      // inputReset();
+      history.push("/login");
     } catch (err) {
       console.log(err);
       alert("회원 가입을 실패하였습니다 ");
@@ -50,7 +40,7 @@ const Register = (props) => {
 
   return (
     <div className="regiter">
-      <form onSubmit={reguster_sumit} className="regiter__form">
+      <form onSubmit={onRegusterSumit} className="regiter__form">
         <h1>회원가입</h1>
         <div className="div">
           <Postinput
@@ -60,9 +50,7 @@ const Register = (props) => {
             onChange={handleChange}
             placeholder={"ID"}
           />
-          {error.id !== "" && <p>{error.id}</p>}
-
-          {console.log(error.id)}
+          {error.id && <p>{error.id}</p>}
 
           <Postinput
             type={"password"}
@@ -71,7 +59,8 @@ const Register = (props) => {
             onChange={handleChange}
             placeholder={"password"}
           />
-          {error.id !== "" && <p>{error.id}</p>}
+          {error.passWord && <p>{error.passWord}</p>}
+
           <Postinput
             type={"email"}
             name={"email"}
@@ -79,7 +68,8 @@ const Register = (props) => {
             onChange={handleChange}
             placeholder={"email"}
           />
-          {error.id !== "" && <p>{error.id}</p>}
+          {error.email && <p>{error.email}</p>}
+
           <Postinput
             type={"name"}
             name={"name"}
@@ -87,7 +77,8 @@ const Register = (props) => {
             onChange={handleChange}
             placeholder={"name"}
           />
-          <Button children={"회원가입"} />
+          {error.name && <p>{error.name}</p>}
+          <Button type={"submit"} children={"회원가입"} />
         </div>
       </form>
     </div>

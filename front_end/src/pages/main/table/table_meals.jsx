@@ -26,10 +26,8 @@ const TableMeals = (props) => {
         let meals = result.data.infor;
         for (let i = 0; i < meals.length; i++) {
           const item = meals[i];
-
           item.time = Time(item.create);
           item.create = getMD(item.create);
-
           item.calorie = item.calorie + "kal";
           meals[i] = item;
         }

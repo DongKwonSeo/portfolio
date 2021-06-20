@@ -10,7 +10,7 @@ const Login = (e) => {
   const dispatch = useDispatch();
   const { form, handleChange, handleSubmit, error } = Useform();
 
-  const login_sumit = (e) => {
+  const onLoginSumit = (e) => {
     e.preventDefault();
     let userInfo = {
       user_id: form.user_id,
@@ -22,7 +22,7 @@ const Login = (e) => {
 
   return (
     <section className="login">
-      <form onSubmit={login_sumit}>
+      <form onSubmit={onLoginSumit}>
         <h1 className="login__title">LOGIN</h1>
         <Postinput
           type={"id"}
@@ -38,7 +38,7 @@ const Login = (e) => {
           onChange={handleChange}
           placeholder={"PASSWORD"}
         />
-        <Button children={"LOGIN"} />
+        <Button type={"sumbit"} children={"LOGIN"} />
       </form>
     </section>
   );

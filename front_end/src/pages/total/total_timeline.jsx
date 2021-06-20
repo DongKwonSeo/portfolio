@@ -3,13 +3,12 @@ import "../../scss/style.scss";
 const TotalTimeline = ({
   timeLines, //
   isopen,
-  Setisopen,
-  SetmodalState,
+  setIsOpen,
+  setModalState,
 }) => {
   const toggleModal = () => {
-    Setisopen(!isopen);
-    console.log(timeLines.type);
-    SetmodalState({ type: timeLines.type, _id: timeLines._id });
+    setIsOpen(!isopen);
+    setModalState({ type: timeLines.type, _id: timeLines._id });
   };
 
   return (

@@ -7,12 +7,10 @@ import "../../scss/style.scss";
 const Main = () => {
   return (
     <section className="section">
-      <div className="container">
-        <List />
-        <div className="table">
-          <Workout />
-          <Meals />
-        </div>
+      <List />
+      <div className="table">
+        <Workout />
+        <Meals />
       </div>
     </section>
   );

@@ -9,7 +9,6 @@ import Total from "./pages/total/total";
 import Login from "./pages/login/login";
 import Register from "./pages/login/register";
 import Auth from "./hoc/auth";
-import Ex from "./components/ex";
 
 function App() {
   return (
@@ -25,7 +24,6 @@ function App() {
             <Route path="/total/detail" component={Auth(Main, true)} />
             <Route path="/meal" component={Auth(CreateMeal, true)} />
             <Route path="/workout" component={Auth(CreateWorkOut, true)} />
-            <Route path="/ex" component={Auth(Ex, null)} />
           </div>
         </>
       </Switch>

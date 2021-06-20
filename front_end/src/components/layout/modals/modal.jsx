@@ -3,7 +3,7 @@ import "../../../scss/style.scss";
 import axios from "axios";
 // import "../../../../scss/common/modal.scss";
 const Modals = ({ id, type }) => {
-  const [workout, Setworkout] = useState({
+  const [workout, setWorkout] = useState({
     // create: "02.12",
     // workout_type: "조깅",
     // hour: "2",
@@ -11,14 +11,14 @@ const Modals = ({ id, type }) => {
     // _id: "1",
   });
 
-  const [meals, Setmeals] = useState({
+  const [meals, setMeals] = useState({
     // _id: 1,
     // create: "02.12",
     // meal_type: "아침",
     // meal_desc: ["수박"],
     // calorie: 200,
   });
-  const [comments, Setcomments] = useState([
+  const [comments, setComments] = useState([
     {
       _id: "",
       comment: "계속 운동 해주세요",
@@ -34,15 +34,15 @@ const Modals = ({ id, type }) => {
   });
 
   // Meals API 가져오기
-  const getmeals = async () => {
+  const getMeals = async () => {
     try {
       const { data } = await axios.get(`http://localhost:3601/api/meals/${id}`);
       let meals = data.infor;
       meals.time = Time(meals.create);
       meals.create = getMD(meals.create);
 
-      Setmeals(meals);
-      Setcomments(meals.comments);
+      setMeals(meals);
+      setComments(meals.comments);
     } catch (error) {
       console.log(error);
     }
@@ -58,8 +58,8 @@ const Modals = ({ id, type }) => {
       const workout = data.infor;
       workout.create = getMD(workout.create);
 
-      Setworkout(workout);
-      Setcomments(workout.comments);
+      setWorkout(workout);
+      setComments(workout.comments);
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +68,7 @@ const Modals = ({ id, type }) => {
   // Meals or Workout = 타입 분류
   const getData = () => {
     if (type === "meals") {
-      getmeals();
+      getMeals();
     } else if (type === "workouts") {
       getWorkout();
     }
@@ -91,7 +91,7 @@ const Modals = ({ id, type }) => {
     return time2;
   }
 
-  const comment_sumit = async (e) => {
+  const commentOnSumit = async (e) => {
     e.preventDefault();
     try {
       await axios.put(`http://localhost:3601/api/${type}/${id}`, postcomments);
@@ -159,7 +159,7 @@ const Modals = ({ id, type }) => {
           )}
 
           {/* 댓글  */}
-          <form className="comment" onSubmit={comment_sumit}>
+          <form className="comment" onSubmit={commentOnSumit}>
             <h2 className="comment__title">코멘트 남기기</h2>
             <input
               className="comment__input"

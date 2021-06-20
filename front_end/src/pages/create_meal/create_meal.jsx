@@ -9,8 +9,8 @@ import "../../scss/style.scss";
 
 const CreateMeal = (props) => {
   const { form, handleChange } = Useform();
-  const [img, SetImage] = useState("../imgs/noimg.png");
-  const [files, Setfiles] = useState(null);
+  const [img, setImage] = useState("../imgs/noimg.png");
+  const [files, setfiles] = useState(null);
   const history = useHistory();
 
   const save = async (e) => {
@@ -22,17 +22,25 @@ const CreateMeal = (props) => {
         },
         withCredentials: true,
       };
+      const response = await axios.post(
+        "http://localhost:3601/api/meals/uploadfiles",
+        config
+      );
+
       const infor = {
         meal_desc: form.mealDesc,
         calorie: form.calorie,
         meal_type: form.mealType,
-        // file: files,
+        // "" : response.data.
       };
       const { data } = await axios.post(
         "http://localhost:3601/api/meals",
         infor,
-        config
+        {
+          withCredentials: true,
+        }
       );
+
       history.push("/total");
       alert("성공했습니다");
     } catch (error) {
@@ -49,14 +57,14 @@ const CreateMeal = (props) => {
   const onChangeFileReader = (e) => {
     if (!e.target.files[0]) {
       const file = null;
-      Setfiles(file);
-      SetImage("../imgs/noimg.png");
+      setfiles(file);
+      setImage("../imgs/noimg.png");
       return;
     }
     const file = e.target.files[0];
-    Setfiles(file);
+    setfiles(file);
     const Image = URL.createObjectURL(file);
-    SetImage(Image);
+    setImage(Image);
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import Button from "../../components/common/button";
 import Postinput from "../../components/common/post_input";
@@ -19,7 +19,10 @@ const CreateWorkOut = (props) => {
         hour: form.hour,
         workout_calorie: form.workoutCalorie,
       };
-      // handleSubmit(e);
+      // if (handleSubmit(e) === false) {
+      //   return;
+      // }
+
       await axios.post("http://localhost:3601/api/workout", infor, config);
       history.push("/total");
       alert("성공했습니다");
@@ -32,7 +35,7 @@ const CreateWorkOut = (props) => {
   return (
     <section className="create_workOut">
       <div className="create_workOut__wrap">
-        <form className="create_workOut__from">
+        <form className="create_workOut__from" onSubmit={save}>
           <Postinput
             title={"운동종류"}
             name={"workoutType"}
@@ -40,7 +43,7 @@ const CreateWorkOut = (props) => {
             onChange={handleChange}
             placeholder={"운동을 입력해주세요"}
           />
-
+          {error.workoutType && <p>{error.workoutType}</p>}
           <Postinput
             title={"운동 소요시간"}
             name={"hour"}
@@ -48,6 +51,7 @@ const CreateWorkOut = (props) => {
             onChange={handleChange}
             placeholder={"소요시간을 입력해주세요"}
           />
+          {error.hour && <p>{error.hour}</p>}
           <Postinput
             title={"소모 칼로리"}
             name={"workoutCalorie"}
@@ -55,9 +59,10 @@ const CreateWorkOut = (props) => {
             onChange={handleChange}
             placeholder={"소모 칼로리를 입력해주세요 ex)kcal"}
           />
+          {error.workoutCalorie && <p>{error.workoutCalorie}</p>}
           <Button
             className="create_workOut__button"
-            onClick={save}
+            type={"submit"}
             children={"SAVE"}
           />
         </form>

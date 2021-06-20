@@ -16,7 +16,7 @@ const Total = (props) => {
     (state) => state.timeInfor
   );
 
-  const [totalList, SettotalList] = useState([
+  const [totalLists, setTotalList] = useState([
     {
       id: "1",
       hour: "3", //
@@ -42,8 +42,8 @@ const Total = (props) => {
       name: "총 운동시간",
     },
   ]);
-  const [isopen, Setisopen] = useState(false);
-  const [modalState, SetmodalState] = useState({});
+  const [isopen, setIsOpen] = useState(false);
+  const [modalState, setModalState] = useState({});
 
   // Time line
   //workOut 만 순회를 해서 계산한다
@@ -60,8 +60,8 @@ const Total = (props) => {
     <section className="total">
       <div className="total__container">
         <div className="total__wrap">
-          {totalList.map((total) => (
-            <TotalList total={total} key={total.id} />
+          {totalLists.map((totalList) => (
+            <TotalList totalList={totalList} key={totalList.id} />
           ))}
         </div>
         <div className="total__wrapper">
@@ -89,8 +89,8 @@ const Total = (props) => {
                     timeLines={item} //
                     key={item._id}
                     isopen={isopen}
-                    Setisopen={Setisopen}
-                    SetmodalState={SetmodalState}
+                    setIsOpen={setIsOpen}
+                    setModalState={setModalState}
                   />
                 ))}
               </tbody>

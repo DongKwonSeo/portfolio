@@ -1,5 +1,50 @@
 @import "./reset.css";
+@import "./variables.scss";
 
+// header
+.header {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: $header_bg;
+  &__container {
+    width: 1200px;
+    margin: 0 auto;
+  }
+  &__logo {
+    padding: 20px 0;
+    text-align: center;
+  }
+  &__inner {
+    background: $inner_bg;
+  }
+  &__nav {
+    padding: 10px 0;
+  }
+  &__nav ul {
+    display: flex;
+    justify-content: center;
+  }
+  &__nav ul a {
+    text-decoration: none;
+  }
+  &__nav ul li {
+    margin-right: 15px;
+    color: $nav_li_color;
+    cursor: pointer;
+    font-size: 20px;
+    text-decoration: none;
+  }
+
+  &__nav ul li:hover {
+    color: $nav_li_on_color;
+  }
+  &__nav ul a.on li {
+    color: $nav_li_on_color;
+  }
+}
+// aside
 .aside {
   background: blue;
   position: fixed;
@@ -41,7 +86,6 @@ td {
   border: none;
   border-bottom: 2px solid white;
 }
-
 
 // padding
 

@@ -1,13 +1,13 @@
 import React from "react";
 import "../../scss/style.scss";
-const TotalList = ({ total }) => {
+const TotalList = ({ totalList }) => {
   return (
     <div className="total__list">
       <div className="total__list__wrap">
         <ul className="total__list__items">
-          <li className="total__list__hour">{total.hour}hour</li>
-          <li className="total__list__name">{total.name}</li>
-          <li className="total__list__turm">{total.turm}</li>
+          <li className="total__list__hour">{totalList.hour}hour</li>
+          <li className="total__list__name">{totalList.name}</li>
+          <li className="total__list__turm">{totalList.turm}</li>
         </ul>
       </div>
     </div>

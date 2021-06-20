@@ -40,6 +40,7 @@ export const authHandler = createAsyncThunk(
       "http://localhost:3601/api/users/auth", //
       { withCredentials: true }
     );
+
     return data;
   }
 );

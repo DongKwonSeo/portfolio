@@ -1,5 +1,5 @@
-import { useState } from "react";
-import formValidater from "../../components/common/form_validater";
+import { useState, useEffect } from "react";
+import formValidater from "./form_validater";
 
 const Useform = () => {
   const [form, SetForm] = useState({
@@ -24,7 +24,7 @@ const Useform = () => {
     hour: "",
     workoutCalorie: "",
   });
-  const [error, SetError] = useState({});
+  const [error, setError] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,8 +34,20 @@ const Useform = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    SetError(formValidater(form));
+  const handleSubmit = (e, type) => {
+    e.preventDefault();
+    // setError(formValidater(form));
+    const result = formValidater(form, type);
+    setError(result);
+
+    console.log(result);
+    if (Object.keys(result).length === 0) {
+      return true;
+      // 에러가 없으면
+    } else {
+      return false;
+      // 에러
+    }
   };
 
   return { handleChange, form, handleSubmit, error };

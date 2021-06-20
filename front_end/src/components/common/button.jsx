@@ -1,9 +1,9 @@
 import React from "react";
 import "../../scss/style.scss";
-const Button = ({ children, onClick }) => {
+const Button = ({ children, onClick, type }) => {
   return (
     <button
-      type="submit"
+      type={type}
       className="btn" //
       onClick={onClick}
     >
