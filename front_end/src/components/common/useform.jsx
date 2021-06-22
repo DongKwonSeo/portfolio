@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import formValidater from "./form_validater";
 
 const Useform = () => {
-  const [form, SetForm] = useState({
+  const [form, setForm] = useState({
     // register
     email: "",
     name: "",
@@ -28,7 +28,7 @@ const Useform = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    SetForm({
+    setForm({
       ...form,
       [name]: value,
     });

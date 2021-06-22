@@ -12,48 +12,88 @@ import Modals from "../../components/layout/modals/modal";
 
 const Total = (props) => {
   const dispatch = useDispatch();
-  const { timeline, workouts, meales } = useSelector(
-    (state) => state.timeInfor
-  );
+  const { timeline, workouts } = useSelector((state) => state.timeInfor);
 
   const [totalLists, setTotalList] = useState([
     {
       id: "1",
       hour: "3", //
-      turm: "DAILY",
+      term: "daily",
       name: "오늘 운동시간",
     },
     {
       id: "2",
       hour: "10", //
-      turm: "WEEKLY",
+      term: "weekly",
       name: "이번주 총운동시간",
     },
     {
       id: "3",
       hour: "10", //
-      turm: "MONTHLY",
+      term: "monthly",
       name: "이번달 총 운동시간",
     },
     {
       id: "4",
       hour: "50", //
-      turm: "TOTAL",
+      term: "total",
       name: "총 운동시간",
     },
   ]);
   const [isopen, setIsOpen] = useState(false);
   const [modalState, setModalState] = useState({});
 
+  const [totalTimeline, setTotalTimeline] = useState({
+    daily: "",
+    weekly: "",
+    monthly: "",
+    total: "",
+  });
+
   // Time line
   //workOut 만 순회를 해서 계산한다
   // 오늘인지 내일인지
   //
+  const calculateTimeline = (workouts) => {
+    const today = new Date().getDate();
+    const currentMonth = new Date().getMonth() + 1;
+
+    let totalTime = {};
+
+    for (let i = 0; workouts.length > i; i++) {
+      const {
+        hour: { createdAt, hour },
+      } = workouts[i];
+
+      const date = new Date(createdAt).getDate();
+      // const month = new Date(createdAt).getMonth() + 1;
+
+      if (date === 22) {
+        console.log(hour);
+        totalTime.daily += hour; // calcDateTime = calcDateTime + hour;
+      }
+      // if (month === currentMonth) {
+      //   console.log(workouts[i]);
+      // totalTime.month += hour;
+      // }
+    }
+    // Array.map((item, i) => {...});
+    // for (let item of workouts) {}
+
+    setTotalTimeline(totalTime);
+  };
 
   // 비동기 !
   useEffect(() => {
-    !timeline.length && dispatch(getTotal());
-    // calculateTimeline(timeline);
+    async function fetchData() {
+      console.log("fetch data");
+      const {
+        payload: { workoutData },
+      } = await dispatch(getTotal());
+
+      calculateTimeline(workoutData);
+    }
+    fetchData();
   }, []);
 
   return (
@@ -61,7 +101,11 @@ const Total = (props) => {
       <div className="total__container">
         <div className="total__wrap">
           {totalLists.map((totalList) => (
-            <TotalList totalList={totalList} key={totalList.id} />
+            <TotalList
+              totalList={totalList}
+              key={totalList.id}
+              calculateList={totalTimeline}
+            />
           ))}
         </div>
         <div className="total__wrapper">

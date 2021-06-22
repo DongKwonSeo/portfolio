@@ -22,16 +22,21 @@ const CreateMeal = (props) => {
         },
         withCredentials: true,
       };
+      const formdata = new FormData();
+      formdata.append("file", files);
+
       const response = await axios.post(
         "http://localhost:3601/api/meals/uploadfiles",
+        formdata,
         config
       );
 
+      console.log(response.data.filePath);
       const infor = {
         meal_desc: form.mealDesc,
         calorie: form.calorie,
         meal_type: form.mealType,
-        // "" : response.data.
+        meal_img: response.data.filePath,
       };
       const { data } = await axios.post(
         "http://localhost:3601/api/meals",
@@ -40,7 +45,7 @@ const CreateMeal = (props) => {
           withCredentials: true,
         }
       );
-
+      console.log(data);
       history.push("/total");
       alert("성공했습니다");
     } catch (error) {

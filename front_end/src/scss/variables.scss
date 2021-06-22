@@ -3,11 +3,16 @@ $nav_li_color: #fff;
 $nav_li_on_color: red;
 $inner_bg: #4f6b68;
 $header_bg: #9dd5cf;
+$maxZidex: 900;
+$modalZidex: 999;
 
 // typo
 $title: 30px;
 $content: 18px;
 $caption: 14px;
+// home
+$logo_padding: 200px;
+$title_font: 30px;
 
 h1 {
   font-size: $title;
@@ -21,13 +26,4 @@ th {
   font-size: $content;
   font-weight: bold;
 }
-// .btn {
-//   background: #1e90ff;
-//   width: 160px;
-//   padding: 20px;
-//   text-align: center;
-//   text-transform: uppercase;
-//   border-radius: 5px;
-//   cursor: pointer;
-//   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-// }
+//

@@ -94,11 +94,12 @@ const Modals = ({ id, type }) => {
   const commentOnSumit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3601/api/${type}/${id}`, postcomments);
+      await axios.put(`http://localhost:3601/api/${type}/${id}`, postcomments, {
+        withCredentials: true,
+      });
       getData();
       setpostcomments({
         comment: "",
-        user_id: "",
       });
     } catch (e) {
       console.log(e);
@@ -107,7 +108,6 @@ const Modals = ({ id, type }) => {
   const commet_Change = (e) => {
     setpostcomments({
       comment: e.target.value,
-      user_id: "60a125dfa801204acd2810d5",
     });
   };
 
@@ -140,6 +140,7 @@ const Modals = ({ id, type }) => {
             <table className="modal__table">
               <thead>
                 <tr>
+                  <th>이미지</th>
                   <th>날짜</th>
                   <th>식사시간</th>
                   <th>식사 분류</th>
@@ -149,6 +150,12 @@ const Modals = ({ id, type }) => {
               <tbody>
                 {/* 날짜	식사시간	아침/점심/저녁	식단 내역	칼로리 */}
                 <tr>
+                  <td>
+                    <img
+                      src={"http://localhost:3601/" + meals.meal_img}
+                      alt="img"
+                    />
+                  </td>
                   <td>{meals.create}</td>
                   <td>{meals.meal_type}</td>
                   <td>{meals.meal_desc}</td>

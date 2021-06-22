@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, STATES } = require("mongoose");
 const { CommentSchema } = require("./comment");
 const getCurrentDate = require("../lib/getCurrentDate");
 const MealsSchema = new Schema({
@@ -20,6 +20,10 @@ const MealsSchema = new Schema({
   create: {
     type: Date,
     default: getCurrentDate(),
+  },
+  meal_img: {
+    type: String,
+    default: "",
   },
   user: {
     type: Schema.ObjectId,

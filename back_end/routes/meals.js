@@ -7,6 +7,7 @@ const {
   putMeal,
   getCalorie,
   getOneMeals,
+  uploadfiles,
 } = require("../controller/meals");
 const { auth } = require("../middleware/auth");
 const router = express.Router();
@@ -15,6 +16,7 @@ router.get("/", auth, getmeals);
 router.get("/cal", getCalorie);
 router.route("/:id").get(getOneMeals);
 router.post("/", auth, createMeal);
+router.post("/uploadfiles", uploadfiles);
 router.put("/:id", auth, putMeal);
 
 module.exports = router;
