@@ -44,6 +44,10 @@ $ yarn start
     * 유저조회
     * 로그인
     * 로그아웃
+ * meals
+ * workout
+ 
+    
 
 ## References
 * 페이지기획서 
