@@ -39,15 +39,7 @@ $ yarn start
 ------------------
 -------
 ### * API 명세
-users
-유저 정보 등록
-POST api/users
-유저 조회
-GET api/users/:id
-유저 관심 등록
-PUT api/users/like
-유저 관심 등록 취소
-PUT api/users/unlike
+
 ## References
 * 페이지기획서 
 * 기능 설명서
