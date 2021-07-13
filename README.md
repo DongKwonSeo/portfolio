@@ -62,9 +62,13 @@ $ yarn start
          * POUST api/meals/uploadfiles
  * workout
     * 운동 리스트 조회
+       * GET api/workout
     * 운동 조회
+       * GET api/workout/:id
     * 운동 등록
+       * POST api/workout
     * 운동 수정
+       * PUT api/workout/:id
     
 
     
