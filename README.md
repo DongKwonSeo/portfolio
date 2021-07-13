@@ -5,13 +5,15 @@
 준비중
 
 ## 기능 설명 
-* 로그인 및 회원 가입 -
+* 로그인 및 회원 가입 
 
 * 이미지 업로딩 기능 - multer 라이브러리 사용
 
 * 스타일 Scss 으로 웹디자인 구성
 
-* Redux 사용해서 전역에서 사용자 로그인 데이터 상태값 관리
+* Redux-ToolKit 사용해서 전역에서 사용자 로그인 데이터 상태값 관리
+
+* 비동기 처리 - Redux-Thunk 사용
 
 * 모바일, 테블릿, PC 크기에 따른 반응형 렌더링 구현
 
@@ -37,7 +39,15 @@ $ yarn start
 ------------------
 -------
 ### * API 명세
-----
+users
+유저 정보 등록
+POST api/users
+유저 조회
+GET api/users/:id
+유저 관심 등록
+PUT api/users/like
+유저 관심 등록 취소
+PUT api/users/unlike
 ## References
 * 페이지기획서 
 * 기능 설명서
