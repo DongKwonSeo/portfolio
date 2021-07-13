@@ -45,8 +45,13 @@ $ yarn start
     * 로그인
     * 로그아웃
  * meals
- * workout
- 
+    *식단 리스트 조회
+    *식단 조회
+    *식단 등록
+    *식단 이미지 등록
+ *workout
+    
+
     
 
 ## References
