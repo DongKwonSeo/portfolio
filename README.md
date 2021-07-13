@@ -74,7 +74,7 @@ $ yarn start
     
 
 ## References
-* 페이지기획서 
+* [페이지기획서](https://xd.adobe.com/view/5ad807c2-7465-4ec9-9257-b4da75e81bc4-0f8b/) 
 * [기능 설명서](https://www.notion.so/97a1417317de469da0d3289e54ca17ee)
 * DB 명세서
 * [API 명세서](https://www.notion.so/API-d8e57069feae44d299991c6c65a71566) 
