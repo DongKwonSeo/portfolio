@@ -50,7 +50,7 @@ $ yarn start
     * 식단 조회
     * 식단 등록
     * 식단 이미지 등록
- *workout
+ * workout
     
 
     
