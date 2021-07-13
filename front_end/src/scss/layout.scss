@@ -1,0 +1,99 @@
+@import "./reset.css";
+@import "./variables.scss";
+
+// header
+.header {
+  z-index: $maxZidex;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: $header_bg;
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  &__logo {
+    padding: 20px 0;
+    text-align: center;
+  }
+  &__inner {
+    background: $inner_bg;
+  }
+  &__nav {
+    padding: 10px 0;
+  }
+  &__nav ul {
+    display: flex;
+    justify-content: center;
+  }
+  &__nav ul a {
+    text-decoration: none;
+  }
+  &__nav ul li {
+    margin-right: 15px;
+    color: $nav_li_color;
+    cursor: pointer;
+    font-size: 20px;
+    text-decoration: none;
+  }
+
+  &__nav ul li:hover {
+    color: $nav_li_on_color;
+  }
+  &__nav ul a.on li {
+    color: $nav_li_on_color;
+  }
+}
+// home
+.home {
+  &__logo {
+    text-align: center;
+    padding: 300px 0 100px 0;
+  }
+  &__box h1 {
+    font-size: $title_font;
+    text-align: center;
+  }
+}
+
+// table
+.table {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main_table {
+  width: 49%;
+  // border: 1px solid #444444;
+  border-collapse: collapse;
+  border: 1px solid #000000 !important;
+  border-radius: 30px;
+  overflow: hidden;
+  text-align: center;
+}
+th,
+td {
+  padding: 15px;
+  background: #ddd;
+  border: none;
+  border-bottom: 2px solid white;
+}
+
+// padding
+
+.post__padding {
+  padding: 50px 0;
+}
+
+.form_padding {
+  padding: 50px 0;
+  text-align: center;
+}
+
+.input_padding {
+  padding: 15px 0;
+}
+.input_padding > input {
+  width: 200px;
+  height: 25px;
+}
