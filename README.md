@@ -41,17 +41,25 @@ $ yarn start
 ### * API 명세
  * user
     * 유저등록
-      * ㅇㅇ 
+      * POST api/users
     * 유저조회
+       * GET api/users
     * 로그인
+      * POST api/users/login
     * 로그아웃
+      * GET api/users/logout
     
  * meals
     * 식단 리스트 조회
+        * GET api/meals
     * 식단 조회
+        * GET api/meals:id
     * 식단 등록
+         * POST api/meals
     * 식단 수정
+         * PUT api/meals/:id
     * 식단 이미지 등록
+         * POUST api/meals/uploadfiles
  * workout
     * 운동 리스트 조회
     * 운동 조회
