@@ -77,4 +77,5 @@ $ yarn start
 * 페이지기획서 
 * 기능 설명서
 * DB 명세서
-* API 명세서
+* [API 명세서] (https://www.notion.so/API-d8e57069feae44d299991c6c65a71566) 
+
